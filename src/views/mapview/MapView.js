@@ -36,8 +36,6 @@ class MapView extends Component {
         super(props);
         this.state = {
             viewport: {
-                width: '100%',
-                height: '100vh',
                 latitude: 37.785164,
                 longitude: -100,
                 zoom: 3.5,
@@ -45,12 +43,21 @@ class MapView extends Component {
         }
     }
 
+    _onViewportChange = viewport => {
+        this.setState({viewport});
+    } 
+
     render() {
+
+        const {viewport} = this.state;
+
         return (
-            <div>
+            <div className="map-view">
                 <ReactMapGL
-                    {...this.state.viewport}
-                    onViewportChange={(viewport) => this.setState({ viewport })}
+                    {...viewport}
+                    width="100%"
+                    height="100%"
+                    onViewportChange={this._onViewportChange}
                     mapStyle="mapbox://styles/mapbox/light-v9"
                     mapboxApiAccessToken={TOKEN}
                 />
