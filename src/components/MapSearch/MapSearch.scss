@@ -1,0 +1,15 @@
+.map-search{
+    position: relative;
+
+    .search-icon{
+        position: absolute;
+        top: 10px;
+        left: 9px;
+    }
+
+    input{
+        height: 35px;
+        width: 550px;
+        padding-left: 32px
+    }
+}

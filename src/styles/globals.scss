@@ -1,0 +1,92 @@
+@import '../styles/colors.scss';
+
+input{
+    background: $white;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+
+    ::placeholder{
+        color: $gray-text;
+    }
+}
+
+.flex{
+    display: flex;
+}
+.align-vertical{
+    display: flex;
+    align-items: center;
+}
+.space-between{
+    display: flex;
+    justify-content: space-between;
+}
+.justify-center{
+    display: flex;
+    justify-content: center;
+}
+
+.p-sm{
+    padding: 6px;
+}
+.p-md{
+    padding: 20px;
+}
+.p-lg{
+    padding: 50px;
+}
+
+.px-sm{
+    padding: 0 6px;
+}
+.px-md{
+    padding: 0 20px;
+}
+.px-lg{
+    padding: 0 50px;
+}
+
+.py-sm{
+    padding: 6px 0;
+}
+.py-md{
+    padding: 20px 0;
+}
+.py-lg{
+    padding: 50px 0;
+}
+
+.m-sm{
+    margin: 6px;
+}
+.m-md{
+    margin: 20px;
+}
+.m-lg{
+    margin: 50px;
+}
+
+.mx-sm{
+    margin: 0 6px;
+}
+.mx-md{
+    margin: 0 20px;
+}
+.mx-lg{
+    margin: 0 50px;
+}
+
+.my-sm{
+    margin: 6px 0;
+}
+.my-md{
+    margin: 20px 0;
+}
+.my-lg{
+    margin: 50px 0;
+}
+
+.shadow{
+    box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.1);
+}

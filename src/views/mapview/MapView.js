@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import ReactMapGL from 'react-map-gl';
+import MapSearch from '../../components/MapSearch/MapSearch';
+import { ReactComponent as CurrentLocation } from '../../assets/svg/current_location.svg';
+import { ReactComponent as Plus } from '../../assets/svg/plus.svg';
+import { ReactComponent as Minus } from '../../assets/svg/minus.svg';
+import { ReactComponent as Settings } from '../../assets/svg/settings.svg';
+
 
 import 'mapbox-gl/dist/mapbox-gl.css';
+import './MapView.scss';
 
 const TOKEN = 'pk.eyJ1IjoicndvbGZlMjIiLCJhIjoiY2szdW5ndmx6MGY2czNtczF3NjdxYXpnayJ9.nhgDynrUo5SYRLezWq00Wg';
 
@@ -46,9 +53,21 @@ class MapView extends Component {
                     onViewportChange={(viewport) => this.setState({ viewport })}
                     mapStyle="mapbox://styles/mapbox/light-v9"
                     mapboxApiAccessToken={TOKEN}
-
                 />
-            </div>
+                <div className="map-overlay m-lg">
+                    <MapSearch />
+                    <div className="map-button justify-center align-vertical">
+                        <CurrentLocation className="location" />
+                    </div>
+                    <div className="map-button-double justify-center align-vertical">
+                        <Plus />
+                        <Minus />
+                    </div>
+                    <div className="map-button justify-center align-vertical">
+                        <Settings />
+                    </div>
+                </div>
+            </div >
         )
     }
 }
