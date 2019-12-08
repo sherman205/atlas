@@ -5,33 +5,3 @@
     width: 100vw;
     height: 100vh;
 }
-
-.map-overlay{
-    position: absolute;
-    top: 0;
-
-    .map-button{
-        width: 26px;
-        height: 26px;
-        background: $white;
-        border-radius: 3px;
-        margin: 10px 0;
-        @extend .shadow;
-
-        .location path{
-            fill: $light-blue;
-            stroke: $light-blue
-        }
-    }
-
-    .map-button-double{
-        display: grid;
-        width: 26px;
-        height: 46px;
-        background: #FCFCFC;
-        border-radius: 3px;
-        margin: 10px 0;
-        padding: 3px 0;
-        @extend .shadow;
-    }
-}

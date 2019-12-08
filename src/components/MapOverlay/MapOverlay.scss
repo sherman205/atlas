@@ -1,0 +1,39 @@
+@import '../../styles/colors.scss';
+@import '../../styles/globals.scss';
+
+.map-overlay{
+    position: absolute;
+    top: 0;
+    width: calc(100% - 100px);
+
+    .map-button{
+        width: 30px;
+        height: 30px;
+        background: $white;
+        border-radius: 3px;
+        margin: 10px 0;
+        @extend .shadow;
+
+        .location path{
+            fill: $light-blue;
+            stroke: $light-blue
+        }
+    }
+
+    .map-button-double{
+        display: grid;
+        width: 30px;
+        height: 52px;
+        background: #FCFCFC;
+        border-radius: 3px;
+        margin: 10px 0;
+        padding: 3px 0;
+        @extend .shadow;
+    }
+
+    .menu{
+        position: absolute;
+        top: 300px;
+        left: 0;
+    }
+}
