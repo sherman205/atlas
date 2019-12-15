@@ -1,0 +1,32 @@
+@import '../../styles/colors.scss';
+@import '../../styles/globals.scss';
+
+.profile-container{
+    width: 100%;
+}
+
+.image-wrapper{
+    border-radius: 50%;
+    height: 170px;
+    overflow: hidden;
+    width: 170px;
+
+    img{
+        width: 100%;
+        height: auto;
+    }
+}
+
+.info-section{
+    border-left: 2px solid $primary;
+
+    .header{
+        color: $gray-text;
+        font-weight: 600;
+    }
+    .content{
+        font-weight: 600;
+        color: $secondary;
+    }
+
+}

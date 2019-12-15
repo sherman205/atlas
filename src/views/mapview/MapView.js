@@ -20,12 +20,12 @@ class MapView extends Component {
     }
 
     _onViewportChange = viewport => {
-        this.setState({viewport});
-    } 
+        this.setState({ viewport });
+    }
 
     render() {
 
-        const {viewport} = this.state;
+        const { viewport } = this.state;
 
         return (
             <div className="map-view">
