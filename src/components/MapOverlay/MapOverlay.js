@@ -20,6 +20,14 @@ class MapOverlay extends Component {
         this.setState({ showMenu: !this.state.showMenu });
     }
 
+    zoomIn = () => {
+        this.props.zoomCallback("in");
+    }
+
+    zoomOut = () => {
+        this.props.zoomCallback("out");
+    }
+
     render() {
         return (
             <div>
@@ -28,9 +36,13 @@ class MapOverlay extends Component {
                     <div className="map-button justify-center align-vertical">
                         <CurrentLocation className="location" />
                     </div>
-                    <div className="map-button-double justify-center align-vertical">
-                        <Plus />
-                        <Minus />
+                    <div className="map-button-double justify-center align-vertical py-sm">
+                        <div className="svg-container align-vertical" onClick={this.zoomIn}>
+                            <Plus />
+                        </div>
+                        <div className="svg-container align-vertical" onClick={this.zoomOut}>
+                            <Minus />
+                        </div>
                     </div>
                     <div className="map-button justify-center align-vertical">
                         <Settings />

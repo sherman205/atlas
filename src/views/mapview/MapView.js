@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, {NavigationControl} from 'react-map-gl';
 import MapOverlay from '../../components/MapOverlay/MapOverlay';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -23,6 +23,18 @@ class MapView extends Component {
         this.setState({ viewport });
     }
 
+    handleZoom = (direction) => {
+        const inc = direction === "in" ? .5 : -.5;
+        this.setState({
+            viewport: {                  
+                ...this.state.viewport,
+                zoom: this.state.viewport.zoom + inc
+            }
+
+        })
+        //console.log("doing a zoomie " + direction);
+    }
+
     render() {
 
         const { viewport } = this.state;
@@ -37,7 +49,7 @@ class MapView extends Component {
                     mapStyle="mapbox://styles/mapbox/light-v9"
                     mapboxApiAccessToken={TOKEN}
                 />
-                <MapOverlay />
+                <MapOverlay zoomCallback={this.handleZoom}/>
             </div>
         )
     }

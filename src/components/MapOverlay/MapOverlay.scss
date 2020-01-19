@@ -26,9 +26,11 @@
         height: 52px;
         background: #FCFCFC;
         border-radius: 3px;
-        margin: 10px 0;
-        padding: 3px 0;
         @extend .shadow;
+
+        .svg-container{
+            height: 20px;
+        }
     }
 
     .menu{
