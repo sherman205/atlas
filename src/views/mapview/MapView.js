@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { Marker } from 'react-map-gl';
 import MapOverlay from '../../components/MapOverlay/MapOverlay';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -11,10 +11,7 @@ class MapView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPosition: {
-                lat: 37.785164,
-                lng: -100
-            },
+            currentPosition: {},
             viewport: {
                 latitude: 37.785164,
                 longitude: -100,
@@ -40,10 +37,12 @@ class MapView extends Component {
 
     getCurrentPosition = (pos) => {
         this.setState({
-            currentPosition: {
-                ...this.state.currentPosition,
-                lat: pos.lat,
-                lng: pos.lng
+            currentPosition: pos,
+            viewport: {
+                ...this.state.viewport,
+                latitude: pos.lat,
+                longitude: pos.lng,
+                zoom: 5
             }
         })
     }
@@ -59,7 +58,18 @@ class MapView extends Component {
                     onViewportChange={this._onViewportChange}
                     mapStyle="mapbox://styles/mapbox/light-v9"
                     mapboxApiAccessToken={TOKEN}
-                />
+                >
+                    {Object.keys(currentPosition).length !== 0 ? (
+                        <Marker
+                            latitude={currentPosition.lat}
+                            longitude={currentPosition.lng}
+                        >
+                            <div>I'm Here!!!</div>
+                        </Marker>
+                        ) : (
+                        <div></div>
+                    )}
+                </ReactMapGL>
                 <MapOverlay zoomCallback={this.handleZoom} geolocation={this.getCurrentPosition}/>
             </div>
         )
