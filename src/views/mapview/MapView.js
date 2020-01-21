@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapGL, {NavigationControl} from 'react-map-gl';
+import ReactMapGL from 'react-map-gl';
 import MapOverlay from '../../components/MapOverlay/MapOverlay';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -11,6 +11,10 @@ class MapView extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            currentPosition: {
+                lat: 37.785164,
+                lng: -100
+            },
             viewport: {
                 latitude: 37.785164,
                 longitude: -100,
@@ -32,13 +36,20 @@ class MapView extends Component {
             }
 
         })
-        //console.log("doing a zoomie " + direction);
+    }
+
+    getCurrentPosition = (pos) => {
+        this.setState({
+            currentPosition: {
+                ...this.state.currentPosition,
+                lat: pos.lat,
+                lng: pos.lng
+            }
+        })
     }
 
     render() {
-
-        const { viewport } = this.state;
-
+        const { viewport, currentPosition } = this.state;
         return (
             <div className="map-view">
                 <ReactMapGL
@@ -49,7 +60,7 @@ class MapView extends Component {
                     mapStyle="mapbox://styles/mapbox/light-v9"
                     mapboxApiAccessToken={TOKEN}
                 />
-                <MapOverlay zoomCallback={this.handleZoom}/>
+                <MapOverlay zoomCallback={this.handleZoom} geolocation={this.getCurrentPosition}/>
             </div>
         )
     }

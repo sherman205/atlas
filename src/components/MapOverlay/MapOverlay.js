@@ -28,12 +28,24 @@ class MapOverlay extends Component {
         this.props.zoomCallback("out");
     }
 
+    currentLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                let pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                this.props.geolocation(pos);
+            });
+        }
+    }
+
     render() {
         return (
             <div>
                 <div className="map-overlay m-lg">
                     <MapSearch />
-                    <div className="map-button justify-center align-vertical">
+                    <div className="map-button justify-center align-vertical" onClick={this.currentLocation}>
                         <CurrentLocation className="location" />
                     </div>
                     <div className="map-button-double justify-center align-vertical py-sm">
