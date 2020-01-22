@@ -1,6 +1,10 @@
+import "mapbox-gl/dist/mapbox-gl.css";
+import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, { Component } from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl';
+import MapGL, { Marker } from 'react-map-gl';
 import MapOverlay from '../../components/MapOverlay/MapOverlay';
+import DeckGL, { GeoJsonLayer } from "deck.gl";
+import Geocoder from "react-map-gl-geocoder";
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './MapView.scss';
@@ -16,9 +20,12 @@ class MapView extends Component {
                 latitude: 37.785164,
                 longitude: -100,
                 zoom: 3.5,
-            }
+            },
+            searchResult: null
         }
     }
+
+    mapRef = React.createRef()
 
     _onViewportChange = viewport => {
         this.setState({ viewport });
@@ -47,11 +54,30 @@ class MapView extends Component {
         })
     }
 
+    handleGeocoderViewportChange = viewport => {
+        const geocoderDefaultOverrides = { transitionDuration: 1000 };
+    
+        return this._onViewportChange({
+          ...viewport,
+          ...geocoderDefaultOverrides
+        });
+    };
+
+    handleOnResult = event => {
+        this.setState({
+          searchResult: new GeoJsonLayer({
+            id: "search-result",
+            data: event.result.geometry
+          })
+        });
+    };
+
     render() {
-        const { viewport, currentPosition } = this.state;
+        const { viewport, currentPosition, searchResult } = this.state;
         return (
             <div className="map-view">
-                <ReactMapGL
+                <MapGL
+                    ref={this.mapRef}
                     {...viewport}
                     width="100%"
                     height="100%"
@@ -69,7 +95,16 @@ class MapView extends Component {
                         ) : (
                         <div></div>
                     )}
-                </ReactMapGL>
+                    <Geocoder
+                        mapRef={this.mapRef}
+                        onResult={this.handleOnResult}
+                        onViewportChange={this.handleGeocoderViewportChange}
+                        mapboxApiAccessToken={TOKEN}
+                        placeholder="Search for a destination"
+                        position="top-left"
+                    />
+                    <DeckGL {...viewport} layers={[searchResult]} />
+                </MapGL>
                 <MapOverlay zoomCallback={this.handleZoom} geolocation={this.getCurrentPosition}/>
             </div>
         )
