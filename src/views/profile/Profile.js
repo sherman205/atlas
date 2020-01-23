@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import ProfilePicture from './components/ProfilePicture';
 import InfoSection from './components/InfoSection';
 
@@ -6,7 +7,25 @@ import '../../styles/globals.scss';
 import './Profile.scss';
 
 class Profile extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            profile: {}
+        }
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:8000/api/v1/profiles/')
+            .then(res => {
+                const profile = res.data;
+                this.setState({
+                    profile: profile[0]
+                });
+            })
+    }
+
     render() {
+        console.log(this.state.profile);
         return (
             <div className="profile-container">
                 <ProfilePicture
