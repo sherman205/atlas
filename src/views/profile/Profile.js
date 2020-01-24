@@ -15,11 +15,11 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/v1/profiles/')
+        axios.get('http://localhost:8000/api/v1/profiles/1/')
             .then(res => {
                 const profile = res.data;
                 this.setState({
-                    profile: profile[0]
+                    profile: profile
                 });
             })
     }
