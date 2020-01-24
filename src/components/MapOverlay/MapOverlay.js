@@ -44,7 +44,7 @@ class MapOverlay extends Component {
         return (
             <div>
                 <div className="map-overlay m-lg">
-                    <MapSearch />
+                    {/* <MapSearch /> */}
                     <div className="map-button justify-center align-vertical" onClick={this.currentLocation}>
                         <CurrentLocation className="location" />
                     </div>

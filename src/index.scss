@@ -1,4 +1,5 @@
 @import './styles/colors.scss';
+@import './styles/globals.scss';
 
 body {
   margin: 0;
@@ -8,7 +9,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $primary;
-  font-size: 12px;
+  font-size: $sm;
+  overflow-x: hidden;
 }
 
 

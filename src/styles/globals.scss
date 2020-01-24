@@ -1,5 +1,7 @@
 @import '../styles/colors.scss';
 
+
+
 input{
     background: $white;
     outline: none;
@@ -11,8 +13,24 @@ input{
     }
 }
 
-.font-weight600{
-    font-weight: 600;
+$sm: 13px;
+$md: 18px;
+$lg: 24px;
+
+$bold: bold;
+
+.font-weight--bold{
+    font-weight: $bold;
+}
+
+.font-size--sm{
+    font-size: $sm;
+}
+.font-size--md{
+    font-size: $sm;
+}
+.font-size--lg{
+    font-size: $sm;
 }
 
 .flex{
