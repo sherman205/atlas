@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import MapSearch from '../MapSearch/MapSearch';
+import { motion } from "framer-motion";
+
 import { ReactComponent as CurrentLocation } from '../../assets/svg/current_location.svg';
 import { ReactComponent as Plus } from '../../assets/svg/plus.svg';
 import { ReactComponent as Minus } from '../../assets/svg/minus.svg';
@@ -45,20 +47,20 @@ class MapOverlay extends Component {
             <div>
                 <div className="map-overlay m-lg">
                     {/* <MapSearch /> */}
-                    <div className="map-button justify-center align-vertical" onClick={this.currentLocation}>
+                    <motion.div className="map-button justify-center align-vertical" whileTap={{ scale: 0.9 }} onClick={this.currentLocation}>
                         <CurrentLocation className="location" />
-                    </div>
-                    <div className="map-button-double justify-center align-vertical py-sm">
+                    </motion.div>
+                    <motion.div className="map-button-double justify-center align-vertical py-sm" whileTap={{ scale: 0.9 }}>
                         <div className="svg-container align-vertical" onClick={this.zoomIn}>
                             <Plus />
                         </div>
                         <div className="svg-container align-vertical" onClick={this.zoomOut}>
                             <Minus />
                         </div>
-                    </div>
-                    <div className="map-button justify-center align-vertical">
+                    </motion.div>
+                    <motion.div className="map-button justify-center align-vertical" whileTap={{ scale: 0.9 }}>
                         <Settings />
-                    </div>
+                    </motion.div>
                     {/* <div className="menu" onClick={this.onMenuClick}>
                         <Menu />
                     </div> */}

@@ -5,7 +5,7 @@
     width: 100vw;
     height: 100vh;
 
-    .current-location{
+    .current-location, .search-location{
         svg{
             position: relative;
             top: -20px;
@@ -34,8 +34,7 @@
             border: none;
             border-radius: 3px;
             height: 35px;
-            width: 550px;
-            padding-left: 32px;
+            //padding-left: 32px;
 
             ::placeholder{
                 color: $gray-text;
@@ -45,10 +44,6 @@
             display: inline-block;
             vertical-align: middle;
             fill: $gray-1;
-        }
-        .mapboxgl-ctrl-geocoder--icon-close {
-            /* hiding for now since placement is not correct */
-            display: none;
         }
 
         .mapboxgl-ctrl-geocoder--icon-loading {
