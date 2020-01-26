@@ -13,11 +13,12 @@ input{
     }
 }
 
+$xsm: 10px;
 $sm: 13px;
 $md: 18px;
 $lg: 24px;
 
-$bold: bold;
+$bold: 600;
 
 .font-weight--bold{
     font-weight: $bold;
@@ -27,10 +28,31 @@ $bold: bold;
     font-size: $sm;
 }
 .font-size--md{
-    font-size: $sm;
+    font-size: $md;
 }
 .font-size--lg{
+    font-size: $lg;
+}
+
+.dropdown-label{
     font-size: $sm;
+    font-weight: $bold;
+}
+
+.ui.selection.dropdown{
+  font-size: $xsm;
+}
+.ui.selection.active.dropdown{
+    border-color: $secondary !important;
+}
+.ui.selection.dropdown:focus {
+    border-color: $secondary !important;
+}
+.ui.selection.active.dropdown .menu{
+    border-color: $secondary !important;
+}
+.ui.dropdown .menu>.item{
+    font-size: $xsm !important;
 }
 
 .flex{
@@ -47,6 +69,10 @@ $bold: bold;
 .justify-center{
     display: flex;
     justify-content: center;
+}
+
+.flex-column{
+    flex-direction: column;
 }
 
 .p-0{

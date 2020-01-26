@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ProfilePicture from './components/ProfilePicture';
 import InfoSection from './components/InfoSection';
+import History from './components/History';
 
-import '../../styles/globals.scss';
 import './Profile.scss';
 
 class Profile extends Component {
@@ -25,20 +25,24 @@ class Profile extends Component {
     }
 
     render() {
+        const { profile } = this.state;
+        console.log(profile);
         return (
             <div className="profile-container">
                 <ProfilePicture
                     imageUrl='https://images.unsplash.com/photo-1576352890209-456c5ac2af6c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80'
-                    name="John Smith"
+                    name={profile.first_name + ' ' + profile.last_name}
                 />
                 <InfoSection
                     header={"Reputation"}
-                    content={"Well Traveled"}
+                    reputation
+                    content={profile.reputation_level}
                 />
                 <InfoSection
                     header={"Location"}
-                    content={"Portland, OR | United States"}
+                    content={profile.city + ', ' + profile.state + ' | ' + profile.country}
                 />
+                <History />
             </div>
         )
     }
