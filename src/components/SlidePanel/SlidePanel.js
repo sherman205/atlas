@@ -14,24 +14,21 @@ const panel = {
 class SlidePanel extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isOpen: false
-        }
     }
 
     togglePanel = () => {
-        this.setState({ isOpen: !this.state.isOpen })
+        const isSidePanelOpen = !this.props.isSidePanelOpen;
+        this.props.toggleSidePanel({ isSidePanelOpen });
     }
     render() {
+        const { isBottomPanelOpen, isSidePanelOpen } = this.props;
+
         return (
             <div>
-                <Menu
-                    className="icon"
-                    onClick={this.togglePanel}
-                />
+
                 <motion.div
                     className="slide-panel shadow"
-                    animate={this.state.isOpen ? "open" : "closed"}
+                    animate={isSidePanelOpen ? "open" : "closed"}
                     transition={{ duration: .5 }}
                     variants={panel}
                 >

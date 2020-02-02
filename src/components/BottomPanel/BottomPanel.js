@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { motion } from "framer-motion";
 import { Divider } from 'semantic-ui-react';
 import { ReactComponent as Cross } from '../../assets/svg/cross.svg';
-import LocationDetails from '../../views/LocationDetails/LocationDetails';
+import LocationDetails from '../../views/LocationDetails';
 
 import './BottomPanel.scss';
 
@@ -14,27 +14,28 @@ const panel = {
 class BottomPanel extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isOpen: true
-        }
     }
 
     togglePanel = () => {
-        this.setState({ isOpen: !this.state.isOpen })
+        const isBottomPanelOpen = !this.props.isBottomPanelOpen;
+        this.props.toggleBottomPanel({ isBottomPanelOpen });
     }
     render() {
+        const { isBottomPanelOpen } = this.props;
+
         return (
             <div>
                 <motion.div
                     className="bottom-panel shadow"
-                    animate={this.state.isOpen ? "open" : "closed"}
+                    animate={isBottomPanelOpen ? "open" : "closed"}
                     transition={{ duration: .5 }}
                     variants={panel}
                 >
                     <div className="bottom-panel-container p-lg">
-                        {/* <Cross
+                        <Cross
+                            style={{ float: 'right' }}
                             onClick={this.togglePanel}
-                        /> */}
+                        />
                         <LocationDetails />
                     </div>
                 </motion.div>

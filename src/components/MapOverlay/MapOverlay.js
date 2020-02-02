@@ -5,23 +5,22 @@ import { motion } from "framer-motion";
 import { ReactComponent as CurrentLocation } from '../../assets/svg/current_location.svg';
 import { ReactComponent as Plus } from '../../assets/svg/plus.svg';
 import { ReactComponent as Minus } from '../../assets/svg/minus.svg';
+import { ReactComponent as Menu } from '../../assets/svg/menu.svg';
 import { ReactComponent as Settings } from '../../assets/svg/settings.svg';
 
 
 import './MapOverlay.scss';
-import SlidePanel from '../SlidePanel/SlidePanel';
-import BottomPanel from '../BottomPanel/BottomPanel';
+import SlidePanel from '../SlidePanel/';
+import BottomPanel from '../BottomPanel';
 
 class MapOverlay extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            showMenu: false,
-        }
     }
 
-    onMenuClick = () => {
-        this.setState({ showMenu: !this.state.showMenu });
+    togglePanel = () => {
+        const isSidePanelOpen = !this.props.isSidePanelOpen;
+        this.props.toggleBottomPanel({ isSidePanelOpen });
     }
 
     zoomIn = () => {
@@ -45,6 +44,9 @@ class MapOverlay extends Component {
     }
 
     render() {
+
+        const { isSidePanelOpen, isBottomPanelOpen } = this.props;
+
         return (
             <div>
                 <div className="map-overlay m-lg">
@@ -63,9 +65,10 @@ class MapOverlay extends Component {
                     <motion.div className="map-button justify-center align-vertical" whileTap={{ scale: 0.9 }}>
                         <Settings />
                     </motion.div>
-                    {/* <div className="menu" onClick={this.onMenuClick}>
-                        <Menu />
-                    </div> */}
+                    <Menu
+                        className="icon"
+                        onClick={this.togglePanel}
+                    />
                 </div>
                 <SlidePanel />
                 <BottomPanel />

@@ -76,16 +76,23 @@ class MapView extends Component {
                 longitude: data.coordinates[0],
             }
         });
+        const searchResults = event.result
+        this.props.updateSearchResults({ searchResults });
     };
 
     showLocationDetailsLabel = () => {
         this.setState({
             showDetailLabel: true
-        })
+        });
     }
 
     openBottomNav = () => {
-        console.log("opening bottom panel");
+        const isBottomPanelOpen = !this.props.isBottomPanelOpen;
+        this.props.toggleBottomPanel({ isBottomPanelOpen });
+
+        this.setState({
+            showDetailLabel: false
+        })
     }
 
     render() {
