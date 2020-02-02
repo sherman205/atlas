@@ -1,20 +1,50 @@
 @import './styles/colors.scss';
 @import './styles/globals.scss';
 
+
+@font-face {
+  font-family: 'AirbnbCerealBook';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./assets/fonts/AirbnbCerealBook.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: 'AirbnbCerealLight';
+  font-style: normal;
+  font-weight: 200;
+  src: url('./assets/fonts/AirbnbCerealLight.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: 'AirbnbCerealBold';
+  font-style: normal;
+  font-weight: 200;
+  src: url('./assets/fonts/AirbnbCerealBold.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: 'AirbnbCerealMedium';
+  font-style: normal;
+  font-weight: 200;
+  src: url('./assets/fonts/AirbnbCerealMedium.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: 'AirbnbCerealBlack';
+  font-style: normal;
+  font-weight: 200;
+  src: url('./assets/fonts/AirbnbCerealBlack.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: AirbnbCerealBold !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: $primary;
-  font-size: $sm;
   overflow-x: hidden;
 }
 
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1, h2, h3, h4, h5 {
+  font-family: AirbnbCerealMedium !important;
 }
