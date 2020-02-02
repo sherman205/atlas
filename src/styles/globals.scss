@@ -17,6 +17,7 @@ $xsm: 10px;
 $sm: 13px;
 $md: 18px;
 $lg: 24px;
+$xlg: 36px;
 
 $bold: 600;
 
@@ -96,6 +97,46 @@ $bold: 600;
 }
 .px-lg{
     padding: 0 50px;
+}
+
+.pr-sm{
+    padding-right: 6px;
+}
+.pr-md{
+    padding-right: 20px;
+}
+.pr-lg{
+    padding-right: 50px;
+}
+
+.pl-sm{
+    padding-left: 6px;
+}
+.pl-md{
+    padding-left: 20px;
+}
+.pl-lg{
+    padding-left: 50px;
+}
+
+.pt-sm{
+    padding-top: 6px;
+}
+.pt-md{
+    padding-top: 20px;
+}
+.pt-lg{
+    padding-top: 50px;
+}
+
+.pb-sm{
+    padding-bottom: 6px;
+}
+.pb-md{
+    padding-bottom: 20px;
+}
+.pb-lg{
+    padding-bottom: 50px;
 }
 
 .py-sm{

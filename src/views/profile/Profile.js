@@ -26,7 +26,6 @@ class Profile extends Component {
 
     render() {
         const { profile } = this.state;
-        console.log(profile);
         return (
             <div className="profile-container">
                 <ProfilePicture

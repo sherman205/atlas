@@ -45,4 +45,53 @@
         grid-template-columns: 1fr 1fr 1fr;
         grid-column-gap: $md;
     }
+
+    .timeline-container{
+        position: relative;
+
+        .background-container{
+            background: linear-gradient(to bottom, rgba($secondary, .16) 0%, $white 70%);
+            border-radius: $md;
+            height: calc(100% - 42px);
+            position: absolute;
+            top: 42px;
+            width: 100%;
+            z-index: 0;
+        }
+        .timeline{
+            position: relative;
+            z-index: 1;
+
+            .timeline-item-container{
+                height: $xlg;
+                
+                p{
+                    margin: auto 0;
+                }
+                .date{
+                    color: $gray-text;
+                }
+                .bullet{
+                    border-radius: 10px;
+                    background: $secondary;
+                    height: 6px;
+                    width: 6px;
+                }
+
+                .vertical-bar{
+                    background: $gray-light;
+                    height: 30px;
+                    position: absolute;
+                    margin-top: 6px;
+                    margin-left: 22px;
+                    width: 2px;
+                }
+
+                .vertical-bar.last{
+                    background: none;
+                }
+            } 
+        }
+
+    }
 }

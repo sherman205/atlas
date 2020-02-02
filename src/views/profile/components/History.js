@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react';
+import Timeline from './Timeline';
 
 import 'semantic-ui-css/semantic.min.css';
 import '../../../styles/globals.scss';
@@ -15,14 +16,12 @@ class History extends Component {
     }
 
     handleDateChange = (value) => {
-        console.log(`selected ${value}`);
         this.setState({
             dateSelected: value
         })
     }
 
     handleGroupChange = (value) => {
-        console.log(`selected ${value}`);
         this.setState({
             groupSelected: value
         })
@@ -81,6 +80,7 @@ class History extends Component {
                         />
                     </div>
                 </div>
+                <Timeline />
             </div>
         )
     }
