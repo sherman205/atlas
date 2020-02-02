@@ -3,6 +3,7 @@ import MapGL, { Marker } from 'react-map-gl';
 import MapOverlay from '../../components/MapOverlay/MapOverlay';
 import DeckGL, { GeoJsonLayer } from "deck.gl";
 import Geocoder from "react-map-gl-geocoder";
+import { Label } from 'semantic-ui-react';
 
 import { ReactComponent as SearchLocation } from '../../assets/svg/pin.svg';
 import { ReactComponent as CurrentLocation } from '../../assets/svg/currentLocationDot.svg';
@@ -24,6 +25,7 @@ class MapView extends Component {
                 zoom: 3.5,
             },
             searchResult: {},
+            showDetailLabel: false
         }
     }
 
@@ -76,8 +78,18 @@ class MapView extends Component {
         });
     };
 
+    showLocationDetailsLabel = () => {
+        this.setState({
+            showDetailLabel: true
+        })
+    }
+
+    openBottomNav = () => {
+        console.log("opening bottom panel");
+    }
+
     render() {
-        const { viewport, currentPosition, searchResult } = this.state;
+        const { viewport, currentPosition, searchResult, showDetailLabel } = this.state;
 
         return (
             <div className="map-view">
@@ -105,7 +117,19 @@ class MapView extends Component {
                             latitude={searchResult.latitude}
                             longitude={searchResult.longitude}
                         >
-                            <div className="search-location"><SearchLocation /></div>
+
+                            <div className="search-location" >
+                                {showDetailLabel &&
+                                    <Label
+                                        className="location-details-label shadow"
+                                        onClick={this.openBottomNav}
+                                        pointing='below'
+                                    >
+                                        View location details
+                                    </Label>
+                                }
+                                <SearchLocation onClick={this.showLocationDetailsLabel} />
+                            </div>
                         </Marker>
                     ) : (
                             <div></div>

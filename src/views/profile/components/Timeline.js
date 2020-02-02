@@ -17,26 +17,6 @@ function Timeline() {
             date: '10/4/01',
             location: 'Glacier National Park, Montana | USA'
         },
-        {
-            date: '10/4/01',
-            location: 'Havertown, PA | USA'
-        },
-        {
-            date: '10/4/01',
-            location: 'Seattle, WA | USA'
-        },
-        {
-            date: '10/4/01',
-            location: 'Glacier National Park, Montana | USA'
-        },
-        {
-            date: '10/4/01',
-            location: 'Seattle, WA | USA'
-        },
-        {
-            date: '10/4/01',
-            location: 'Glacier National Park, Montana | USA'
-        },
 
 
     ]
@@ -45,7 +25,7 @@ function Timeline() {
         <div className="timeline-container">
             <div className="timeline p-sm">
                 {items.map((item, index) =>
-                    <TimelineItem item={item} key={item.location} last={index === items.length - 1 ? true : false} />
+                    <TimelineItem item={item} key={index} last={index === items.length - 1 ? true : false} />
                 )}
             </div>
             {items.length > 2 &&

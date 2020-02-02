@@ -1,0 +1,14 @@
+@import '../../styles/colors.scss';
+
+.icon{
+    position: absolute;
+    top: 50px;
+    right: 50px;
+}
+.bottom-panel {
+    position: absolute;
+    background: $white;
+    width: 100vw;
+    height: 400px;
+}
+  

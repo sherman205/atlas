@@ -7,14 +7,16 @@ import { ReactComponent as Plus } from '../../assets/svg/plus.svg';
 import { ReactComponent as Minus } from '../../assets/svg/minus.svg';
 import { ReactComponent as Settings } from '../../assets/svg/settings.svg';
 
+
 import './MapOverlay.scss';
 import SlidePanel from '../SlidePanel/SlidePanel';
+import BottomPanel from '../BottomPanel/BottomPanel';
 
 class MapOverlay extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showMenu: false
+            showMenu: false,
         }
     }
 
@@ -66,6 +68,7 @@ class MapOverlay extends Component {
                     </div> */}
                 </div>
                 <SlidePanel />
+                <BottomPanel />
             </div>
         )
     }

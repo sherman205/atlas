@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { motion } from "framer-motion";
-import { ReactComponent as Menu } from '../../assets/svg/menu.svg';
+import { Divider } from 'semantic-ui-react';
 import { ReactComponent as Cross } from '../../assets/svg/cross.svg';
-import Profile from '../../views/profile/Profile';
+import LocationDetails from '../../views/LocationDetails/LocationDetails';
 
-import './SlidePanel.scss';
+import './BottomPanel.scss';
 
 const panel = {
-    open: { right: 0 },
-    closed: { right: -600 },
+    open: { bottom: 0 },
+    closed: { bottom: -400 },
 };
 
-class SlidePanel extends Component {
+class BottomPanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false
+            isOpen: true
         }
     }
 
@@ -25,21 +25,17 @@ class SlidePanel extends Component {
     render() {
         return (
             <div>
-                <Menu
-                    className="icon"
-                    onClick={this.togglePanel}
-                />
                 <motion.div
-                    className="slide-panel shadow"
+                    className="bottom-panel shadow"
                     animate={this.state.isOpen ? "open" : "closed"}
                     transition={{ duration: .5 }}
                     variants={panel}
                 >
-                    <div className="panel-container p-lg">
-                        <Cross
+                    <div className="bottom-panel-container p-lg">
+                        {/* <Cross
                             onClick={this.togglePanel}
-                        />
-                        <Profile />
+                        /> */}
+                        <LocationDetails />
                     </div>
                 </motion.div>
             </div>
@@ -47,4 +43,4 @@ class SlidePanel extends Component {
     }
 }
 
-export default SlidePanel;
+export default BottomPanel;
