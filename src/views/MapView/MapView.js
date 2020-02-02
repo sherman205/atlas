@@ -4,6 +4,7 @@ import MapOverlay from '../../components/MapOverlay/MapOverlay';
 import DeckGL, { GeoJsonLayer } from "deck.gl";
 import Geocoder from "react-map-gl-geocoder";
 import { Label } from 'semantic-ui-react';
+import LoadingComponent from '../../components/LoadingComponent';
 
 import { ReactComponent as SearchLocation } from '../../assets/svg/pin.svg';
 import { ReactComponent as CurrentLocation } from '../../assets/svg/currentLocationDot.svg';
@@ -25,7 +26,8 @@ class MapView extends Component {
                 zoom: 3.5,
             },
             searchResult: {},
-            showDetailLabel: false
+            showDetailLabel: false,
+            mapLoaded: false,
         }
     }
 
@@ -76,7 +78,7 @@ class MapView extends Component {
                 longitude: data.coordinates[0],
             }
         });
-        const searchResults = event.result
+        const searchResults = event.result;
         this.props.updateSearchResults({ searchResults });
     };
 
@@ -86,9 +88,12 @@ class MapView extends Component {
         });
     }
 
-    openBottomNav = () => {
-        const isBottomPanelOpen = !this.props.isBottomPanelOpen;
-        this.props.toggleBottomPanel({ isBottomPanelOpen });
+    openLocationDetails = () => {
+        const slidePanelContent = 'location_details';
+        this.props.showInSlidePanel({ slidePanelContent });
+
+        const isSidePanelOpen = true;
+        this.props.toggleSidePanel({ isSidePanelOpen });
 
         this.setState({
             showDetailLabel: false
@@ -96,7 +101,7 @@ class MapView extends Component {
     }
 
     render() {
-        const { viewport, currentPosition, searchResult, showDetailLabel } = this.state;
+        const { viewport, currentPosition, searchResult, showDetailLabel, mapLoaded } = this.state;
 
         return (
             <div className="map-view">
@@ -108,6 +113,7 @@ class MapView extends Component {
                     onViewportChange={this._onViewportChange}
                     mapStyle="mapbox://styles/mapbox/light-v9"
                     mapboxApiAccessToken={TOKEN}
+                    onLoad={() => this.setState({ mapLoaded: true })}
                 >
                     {Object.keys(currentPosition).length !== 0 ? (
                         <Marker
@@ -126,15 +132,13 @@ class MapView extends Component {
                         >
 
                             <div className="search-location" >
-                                {showDetailLabel &&
-                                    <Label
-                                        className="location-details-label shadow"
-                                        onClick={this.openBottomNav}
-                                        pointing='below'
-                                    >
-                                        View location details
+                                <Label
+                                    className="location-details-label shadow"
+                                    onClick={this.openLocationDetails}
+                                    pointing='below'
+                                >
+                                    View location details
                                     </Label>
-                                }
                                 <SearchLocation onClick={this.showLocationDetailsLabel} />
                             </div>
                         </Marker>
@@ -158,6 +162,9 @@ class MapView extends Component {
                     </div>
                 </MapGL>
                 <MapOverlay zoomCallback={this.handleZoom} geolocation={this.getCurrentPosition} />
+                {!mapLoaded &&
+                    <LoadingComponent />
+                }
             </div>
         )
     }

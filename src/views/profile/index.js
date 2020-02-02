@@ -1,16 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-    toggleBottomPanel,
     toggleSidePanel,
     updateSearchResults,
-    showInSlidePanel
+    showInSlidePanel,
+    setUser
 } from '../../js/actions/index';
-import MapView from './MapView';
+import Profile from './Profile';
 
 const mapStateToProps = state => {
     return {
-        searchResults: state.searchResults
+        searchResults: state.searchResults,
+        user: state.user
     };
 };
 
@@ -19,8 +20,9 @@ function mapDispatchToProps(dispatch) {
         toggleSidePanel: isSidePanelOpen => dispatch(toggleSidePanel(isSidePanelOpen)),
         updateSearchResults: searchResults => dispatch(updateSearchResults(searchResults)),
         showInSlidePanel: slidePanelContent => dispatch(showInSlidePanel(slidePanelContent)),
+        setUser: user => dispatch(setUser(user)),
 
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapView);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

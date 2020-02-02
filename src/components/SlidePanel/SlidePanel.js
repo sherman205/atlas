@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { motion } from "framer-motion";
 import { ReactComponent as Menu } from '../../assets/svg/menu.svg';
 import { ReactComponent as Cross } from '../../assets/svg/cross.svg';
-import Profile from '../../views/profile/Profile';
+import Profile from '../../views/profile';
+import LocationDetails from '../../views/LocationDetails';
 
 import './SlidePanel.scss';
 
@@ -21,10 +22,16 @@ class SlidePanel extends Component {
         this.props.toggleSidePanel({ isSidePanelOpen });
     }
     render() {
-        const { isBottomPanelOpen, isSidePanelOpen } = this.props;
+        const { isBottomPanelOpen, isSidePanelOpen, searchResults, slidePanelContent } = this.props;
 
         return (
             <div>
+                {!isSidePanelOpen &&
+                    <Menu
+                        className="icon"
+                        onClick={this.togglePanel}
+                    />
+                }
                 <motion.div
                     className="slide-panel shadow"
                     animate={isSidePanelOpen ? "open" : "closed"}
@@ -35,13 +42,14 @@ class SlidePanel extends Component {
                         <Cross
                             onClick={this.togglePanel}
                         />
-                        <Profile />
+                        {slidePanelContent === 'profile' &&
+                            <Profile />
+                        }
+                        {(slidePanelContent === 'location_details' && searchResults) &&
+                            <LocationDetails search={searchResults} />
+                        }
                     </div>
                 </motion.div>
-                <Menu
-                    className="icon"
-                    onClick={this.togglePanel}
-                />
             </div>
         )
     }

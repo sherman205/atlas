@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import { toggleSidePanel } from '../../js/actions/index';
 import SlidePanel from './SlidePanel';
@@ -6,7 +5,9 @@ import SlidePanel from './SlidePanel';
 const mapStateToProps = state => {
     return {
         isBottomPanelOpen: state.isBottomPanelOpen,
-        isSidePanelOpen: state.isSidePanelOpen
+        isSidePanelOpen: state.isSidePanelOpen,
+        searchResults: state.searchResults,
+        slidePanelContent: state.slidePanelContent,
     };
 };
 

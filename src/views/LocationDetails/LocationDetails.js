@@ -16,6 +16,8 @@ class LocationDetails extends Component {
 
             let { state, country } = '';
 
+            const searchDisplay = (searchResults.address ? searchResults.address + ' ' : '') + searchResults.text
+
             searchResults.context.map(item => {
                 if (item.id.includes('region')) {
                     state = item.text;
@@ -25,12 +27,9 @@ class LocationDetails extends Component {
                 }
             })
             return (
-                <div className="location-details flex flex-column mx-lg px-lg">
+                <div className="location-details flex flex-column my-lg">
                     <div className="flex">
-                        {searchResults.address &&
-                            <h1 className="location-details-header my-sm">{searchResults.address}&nbsp;</h1>
-                        }
-                        <h1 className="location-details-header my-sm">{searchResults.text}</h1>
+                        <h1 className="location-details-header my-sm">{searchDisplay}</h1>
                     </div>
                     <h4 className="location-details-subheader my-sm">{state} | {country}</h4>
                     <Divider />
