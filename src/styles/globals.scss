@@ -13,11 +13,13 @@ input{
     }
 }
 
+$xsm: 10px;
 $sm: 13px;
 $md: 18px;
 $lg: 24px;
+$xlg: 36px;
 
-$bold: bold;
+$bold: 600;
 
 .font-weight--bold{
     font-weight: $bold;
@@ -27,10 +29,31 @@ $bold: bold;
     font-size: $sm;
 }
 .font-size--md{
-    font-size: $sm;
+    font-size: $md;
 }
 .font-size--lg{
+    font-size: $lg;
+}
+
+.dropdown-label{
     font-size: $sm;
+    font-weight: $bold;
+}
+
+.ui.selection.dropdown{
+  font-size: $xsm;
+}
+.ui.selection.active.dropdown{
+    border-color: $secondary !important;
+}
+.ui.selection.dropdown:focus {
+    border-color: $secondary !important;
+}
+.ui.selection.active.dropdown .menu{
+    border-color: $secondary !important;
+}
+.ui.dropdown .menu>.item{
+    font-size: $xsm !important;
 }
 
 .flex{
@@ -47,6 +70,10 @@ $bold: bold;
 .justify-center{
     display: flex;
     justify-content: center;
+}
+
+.flex-column{
+    flex-direction: column;
 }
 
 .p-0{
@@ -70,6 +97,46 @@ $bold: bold;
 }
 .px-lg{
     padding: 0 50px;
+}
+
+.pr-sm{
+    padding-right: 6px;
+}
+.pr-md{
+    padding-right: 20px;
+}
+.pr-lg{
+    padding-right: 50px;
+}
+
+.pl-sm{
+    padding-left: 6px;
+}
+.pl-md{
+    padding-left: 20px;
+}
+.pl-lg{
+    padding-left: 50px;
+}
+
+.pt-sm{
+    padding-top: 6px;
+}
+.pt-md{
+    padding-top: 20px;
+}
+.pt-lg{
+    padding-top: 50px;
+}
+
+.pb-sm{
+    padding-bottom: 6px;
+}
+.pb-md{
+    padding-bottom: 20px;
+}
+.pb-lg{
+    padding-bottom: 50px;
 }
 
 .py-sm{
