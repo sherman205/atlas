@@ -25,7 +25,6 @@ class SlidePanel extends Component {
 
         return (
             <div>
-
                 <motion.div
                     className="slide-panel shadow"
                     animate={isSidePanelOpen ? "open" : "closed"}
@@ -39,6 +38,10 @@ class SlidePanel extends Component {
                         <Profile />
                     </div>
                 </motion.div>
+                <Menu
+                    className="icon"
+                    onClick={this.togglePanel}
+                />
             </div>
         )
     }

@@ -10,10 +10,4 @@ const mapStateToProps = state => {
     };
 };
 
-function mapDispatchToProps(dispatch) {
-    return {
-        toggleSidePanel: isSidePanelOpen => dispatch(toggleSidePanel(isSidePanelOpen))
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MapOverlay);
+export default connect(mapStateToProps, null)(MapOverlay);

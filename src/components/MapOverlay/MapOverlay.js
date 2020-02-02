@@ -18,11 +18,6 @@ class MapOverlay extends Component {
         super(props);
     }
 
-    togglePanel = () => {
-        const isSidePanelOpen = !this.props.isSidePanelOpen;
-        this.props.toggleBottomPanel({ isSidePanelOpen });
-    }
-
     zoomIn = () => {
         this.props.zoomCallback("in");
     }
@@ -65,10 +60,7 @@ class MapOverlay extends Component {
                     <motion.div className="map-button justify-center align-vertical" whileTap={{ scale: 0.9 }}>
                         <Settings />
                     </motion.div>
-                    <Menu
-                        className="icon"
-                        onClick={this.togglePanel}
-                    />
+
                 </div>
                 <SlidePanel />
                 <BottomPanel />
