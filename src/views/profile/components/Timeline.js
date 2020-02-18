@@ -1,34 +1,26 @@
 import React from 'react';
 import TimelineItem from './TimelineItem';
 import '../Profile.scss';
+import moment from 'moment';
 
-function Timeline() {
+function Timeline(props) {
+    const { savedPins } = props;
 
-    const items = [
-        {
-            date: '10/4/01',
-            location: 'Havertown, PA | USA'
-        },
-        {
-            date: '10/4/01',
-            location: 'Seattle, WA | USA'
-        },
-        {
-            date: '10/4/01',
-            location: 'Glacier National Park, Montana | USA'
-        },
-
-
-    ]
+    let items = savedPins.map(pin => {
+        return {
+            date: moment(pin.date).format("MMM Do YY"),
+            location: pin.city + ' | ' + pin.country              // Feb 17th 20
+        }
+    });
 
     return (
         <div className="timeline-container">
             <div className="timeline p-sm">
                 {items.map((item, index) =>
-                    <TimelineItem item={item} key={index} last={index === items.length - 1 ? true : false} />
+                    <TimelineItem item={item} key={index} last={index === savedPins.length - 1 ? true : false} />
                 )}
             </div>
-            {items.length > 2 &&
+            {savedPins.length > 2 &&
                 <div className="background-container" />
             }
         </div>

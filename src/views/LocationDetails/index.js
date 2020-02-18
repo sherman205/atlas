@@ -3,8 +3,8 @@ import LocationDetails from './LocationDetails';
 
 const mapStateToProps = state => {
     return {
-        searchResults: state.searchResults
+        searchResults: state.searchResults,
     };
 };
 
-export default connect(mapStateToProps, null)(LocationDetails);
+export default connect(mapStateToProps, {})(LocationDetails);

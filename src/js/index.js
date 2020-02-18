@@ -4,7 +4,8 @@ import {
     toggleSidePanel,
     updateSearchResults,
     showInSlidePanel,
-    setUser
+    setUser,
+    updateSavedPins,
 } from "../js/actions/index";
 
 window.store = store;
@@ -14,3 +15,4 @@ window.updateSearchResults = updateSearchResults;
 window.showInSlidePanel = showInSlidePanel;
 window.showInSlidePanel = showInSlidePanel;
 window.setUser = setUser;
+window.updateSavedPins = updateSavedPins;

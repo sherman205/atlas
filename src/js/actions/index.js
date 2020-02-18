@@ -4,7 +4,9 @@ import {
     UPDATE_SEARCH_RESULTS,
     SHOW_IN_SLIDE_PANEL,
     SET_USER,
+    UPDATE_SAVED_PINS,
 } from "../constants/action-types";
+import { getQueriesForElement } from "@testing-library/react";
 
 
 export function toggleBottomPanel(payload) {
@@ -26,3 +28,46 @@ export function showInSlidePanel(payload) {
 export function setUser(payload) {
     return { type: SET_USER, payload }
 };
+
+export function updateSavedPins(payload) {
+    return { type: UPDATE_SAVED_PINS, payload }
+}
+
+export function getUser(id) {
+    return dispatch => {
+        return fetch('http://127.0.0.1:8000/api/v1/profiles/1/', {
+            method: 'GET', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const user = data;
+                dispatch(getPins());
+                dispatch(setUser({ user }));
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+}
+
+export function getPins() {
+    return dispatch => {
+        return fetch('http://127.0.0.1:8000/api/v1/pins/1/', {
+            method: 'GET', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const savedPins = data;
+                dispatch(updateSavedPins(savedPins));
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    };
+}

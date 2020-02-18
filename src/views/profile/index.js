@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
+    getUser,
     toggleSidePanel,
     updateSearchResults,
     showInSlidePanel,
@@ -10,7 +11,7 @@ import Profile from './Profile';
 
 const mapStateToProps = state => {
     return {
-        searchResults: state.searchResults,
+        savedPins: state.savedPins,
         user: state.user
     };
 };
@@ -20,8 +21,7 @@ function mapDispatchToProps(dispatch) {
         toggleSidePanel: isSidePanelOpen => dispatch(toggleSidePanel(isSidePanelOpen)),
         updateSearchResults: searchResults => dispatch(updateSearchResults(searchResults)),
         showInSlidePanel: slidePanelContent => dispatch(showInSlidePanel(slidePanelContent)),
-        setUser: user => dispatch(setUser(user)),
-
+        getUser: id => dispatch(getUser(id)),
     };
 }
 
