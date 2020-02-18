@@ -5,6 +5,32 @@
     width: 100vw;
     height: 100vh;
 
+    .saved-pin{
+        position: relative;
+
+        .saved-pin-label{
+            background: $white;
+            display: none;
+            position: absolute;
+            left: -70px;
+            top: -55px;
+            width: 140px;
+        }
+
+        svg{
+            position: relative;
+            top: -40px;
+            right: 10px;
+            height:20px;
+        }
+    }
+
+    .saved-pin:hover{
+        .saved-pin-label{
+            display: block;
+        }
+    }
+
     .search-location, .current-location{
         position: relative;
 
@@ -15,6 +41,7 @@
             top: -55px;
             width: 140px;
         }
+
         
         svg{
             position: relative;

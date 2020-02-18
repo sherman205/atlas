@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Divider, Button, Icon, Label } from 'semantic-ui-react';
 import { ReactComponent as SavedPin } from '../../assets/svg/saved_pin.svg';
+import moment from 'moment';
 
 import './LocationDetails.scss';
 
@@ -13,10 +14,42 @@ class LocationDetails extends Component {
         }
     }
 
+    togglePin = () => {
+        const { saved } = this.state;
+        const { removePin, savedPins, savePin, searchResults, user } = this.props;
+
+        const isCurrentlySaved = this.isCurrentlySaved();
+
+        if (!isCurrentlySaved) {
+            console.log("adding");
+            const pin = {
+                date: moment().format(),
+                latitude: searchResults.geometry.coordinates[1],
+                longitude: searchResults.geometry.coordinates[0],
+                city: searchResults.text,
+                state: 'OR', //searchResults.context[0].text,
+                country: searchResults.context[1].text,
+                user_id: user.id
+            }
+            savePin(pin);
+        }
+        else {
+            console.log("removing");
+
+            removePin(isCurrentlySaved.id);
+        }
+    }
+
+    isCurrentlySaved = () => {
+        const { savedPins, searchResults } = this.props;
+
+        return savedPins.find(pin => pin.city === searchResults.text);
+    }
+
     render() {
         const { searchResults } = this.props;
-        const { saved } = this.state;
 
+        const isCurrentlySaved = this.isCurrentlySaved();
         if (searchResults.text) {
 
             let { state, country } = '';
@@ -39,12 +72,12 @@ class LocationDetails extends Component {
                     <h4 className="location-details-subheader my-sm">{state} | {country}</h4>
                     <Divider />
                     <p>Bunch of content related to location goes here</p>
-                    <Button as='div' labelPosition='right' size='mini' onClick={() => this.setState({ saved: true })}>
-                        <Button basic color={`${saved ? 'blue' : 'red'}`} size='mini' className="flex flex-column justify-center">
+                    <Button as='div' labelPosition='right' size='mini' onClick={this.togglePin}>
+                        <Button basic color={`${isCurrentlySaved ? 'blue' : 'red'}`} size='mini' className="flex flex-column justify-center">
                             <SavedPin />
                         </Button>
-                        <Label as='a' color={`${saved ? 'blue' : 'red'}`} size='mini' pointing='left'>
-                            {saved ? 'Location pinned' : 'Pin this location'}
+                        <Label as='a' color={`${isCurrentlySaved ? 'blue' : 'red'}`} size='mini' pointing='left'>
+                            {isCurrentlySaved ? 'Location pinned' : 'Pin this location'}
                         </Label>
                     </Button>
                 </div>

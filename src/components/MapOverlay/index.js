@@ -4,10 +4,7 @@ import { toggleSidePanel } from '../../js/actions/index';
 import MapOverlay from './MapOverlay';
 
 const mapStateToProps = state => {
-    return {
-        isBottomPanelOpen: state.isBottomPanelOpen,
-        isSidePanelOpen: state.isSidePanelOpen
-    };
+    return {};
 };
 
 export default connect(mapStateToProps, null)(MapOverlay);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MapGL, { Marker } from 'react-map-gl';
-import MapOverlay from '../../components/MapOverlay/MapOverlay';
+import MapOverlay from '../../components/MapOverlay';
 import DeckGL, { GeoJsonLayer } from "deck.gl";
 import Geocoder from "react-map-gl-geocoder";
 import { Label } from 'semantic-ui-react';
@@ -8,6 +8,8 @@ import LoadingComponent from '../../components/LoadingComponent';
 
 import { ReactComponent as SearchLocation } from '../../assets/svg/pin.svg';
 import { ReactComponent as CurrentLocation } from '../../assets/svg/currentLocationDot.svg';
+import { ReactComponent as SavedPin } from '../../assets/svg/saved_pin.svg';
+
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
@@ -103,6 +105,8 @@ class MapView extends Component {
     render() {
         const { viewport, currentPosition, searchResult, showDetailLabel, mapLoaded } = this.state;
 
+        const { savedPins } = this.props;
+
         return (
             <div className="map-view">
                 <MapGL
@@ -115,6 +119,37 @@ class MapView extends Component {
                     mapboxApiAccessToken={TOKEN}
                     onLoad={() => this.setState({ mapLoaded: true })}
                 >
+                    {savedPins.map(pin => {
+                        return (
+                            <Marker
+                                latitude={parseFloat(pin.latitude)}
+                                longitude={parseFloat(pin.longitude)}
+                            >
+                                <div className="saved-pin">
+                                    <Label
+                                        className="saved-pin-label shadow"
+                                        //onClick={this.openLocationDetails}
+                                        pointing='below'
+                                    >
+                                        {pin.city}
+                                    </Label>
+                                    <SavedPin />
+                                </div>
+                            </Marker>
+                        )
+                    })
+
+                    }
+                    {Object.keys(currentPosition).length !== 0 ? (
+                        <Marker
+                            latitude={currentPosition.lat}
+                            longitude={currentPosition.lng}
+                        >
+                            <div className="current-location"><CurrentLocation /></div>
+                        </Marker>
+                    ) : (
+                            <div></div>
+                        )}
                     {Object.keys(currentPosition).length !== 0 ? (
                         <Marker
                             latitude={currentPosition.lat}

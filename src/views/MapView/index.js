@@ -10,7 +10,9 @@ import MapView from './MapView';
 
 const mapStateToProps = state => {
     return {
-        searchResults: state.searchResults
+        searchResults: state.searchResults,
+        savedPins: state.savedPins,
+        user: state.user,
     };
 };
 

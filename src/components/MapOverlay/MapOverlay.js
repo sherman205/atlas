@@ -41,8 +41,6 @@ class MapOverlay extends Component {
 
     render() {
 
-        const { isSidePanelOpen, isBottomPanelOpen } = this.props;
-
         return (
             <div>
                 <div className="map-overlay m-lg">

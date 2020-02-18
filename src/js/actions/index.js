@@ -36,7 +36,7 @@ export function updateSavedPins(payload) {
 export function getUser(id) {
     return dispatch => {
         return fetch('http://127.0.0.1:8000/api/v1/profiles/1/', {
-            method: 'GET', // or 'PUT'
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -56,7 +56,7 @@ export function getUser(id) {
 export function getPins() {
     return dispatch => {
         return fetch('http://127.0.0.1:8000/api/v1/pins/1/', {
-            method: 'GET', // or 'PUT'
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -70,4 +70,43 @@ export function getPins() {
                 console.error('Error:', error);
             });
     };
+}
+
+export function savePin(pin) {
+    return dispatch => {
+        return fetch('http://127.0.0.1:8000/api/v1/pins/add/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(pin),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const savedPins = data;
+                dispatch(updateSavedPins(savedPins));
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+}
+
+export function removePin(id) {
+    return dispatch => {
+        return fetch(`http://127.0.0.1:8000/api/v1/pins/delete/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const savedPins = data;
+                dispatch(updateSavedPins(savedPins));
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
 }
