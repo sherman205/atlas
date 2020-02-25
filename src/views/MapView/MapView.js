@@ -50,6 +50,7 @@ class MapView extends Component {
     }
 
     getCurrentPosition = (pos) => {
+        console.log(pos);
         const zoom = this.state.viewport.zoom >= 10 ? this.state.viewport.zoom : 10;
         this.setState({
             currentPosition: pos,
@@ -113,19 +114,19 @@ class MapView extends Component {
                     onLoad={() => this.setState({ mapLoaded: true })}
                 >
                     {savedPins.map(pin => {
-                        console.log(pin.city);
-                        console.log(searchResults);
-                        if (searchResults.text !== pin.city) {
+                        if (searchResults.text !== pin.map_search_text) {
                             return (
                                 <Marker
                                     latitude={parseFloat(pin.latitude)}
                                     longitude={parseFloat(pin.longitude)}
                                     key={pin.id}
                                 >
-                                    <div className="saved-pin">
+                                    <div
+                                        className="saved-pin"
+                                        onClick={() => this.openLocationDetails}
+                                    >
                                         <Label
                                             className="saved-pin-label shadow"
-                                            //onClick={this.openLocationDetails}
                                             pointing='below'
                                         >
                                             {pin.city}

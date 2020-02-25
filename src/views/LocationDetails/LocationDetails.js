@@ -25,6 +25,7 @@ class LocationDetails extends Component {
                 date: moment().format(),
                 latitude: searchResults.geometry.coordinates[1],
                 longitude: searchResults.geometry.coordinates[0],
+                map_search_text: searchResults.text,
                 city: searchResults.text,
                 state: 'OR', //searchResults.context[0].text,
                 country: searchResults.context[1].text,
@@ -33,8 +34,6 @@ class LocationDetails extends Component {
             savePin(pin);
         }
         else {
-            console.log("removing");
-
             removePin(isCurrentlySaved.id);
         }
     }
