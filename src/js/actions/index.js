@@ -94,8 +94,8 @@ export function savePin(pin) {
 
 export function removePin(id) {
     return dispatch => {
-        return fetch(`http://127.0.0.1:8000/api/v1/pins/delete/${id}`, {
-            method: 'POST',
+        return fetch(`http://127.0.0.1:8000/api/v1/pins/delete/${id}/`, {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
             },
