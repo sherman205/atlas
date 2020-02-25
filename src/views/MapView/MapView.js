@@ -27,7 +27,6 @@ class MapView extends Component {
                 longitude: -100,
                 zoom: 3.5,
             },
-            searchResult: {},
             showDetailLabel: false,
             mapLoaded: false,
         }
@@ -74,12 +73,6 @@ class MapView extends Component {
 
     handleOnResult = event => {
         const data = event.result.geometry;
-        this.setState({
-            searchResult: {
-                latitude: data.coordinates[1],
-                longitude: data.coordinates[0],
-            }
-        });
         const searchResults = event.result;
         this.props.updateSearchResults({ searchResults });
     };
@@ -103,9 +96,9 @@ class MapView extends Component {
     }
 
     render() {
-        const { viewport, currentPosition, searchResult, showDetailLabel, mapLoaded } = this.state;
+        const { viewport, currentPosition, showDetailLabel, mapLoaded } = this.state;
 
-        const { savedPins } = this.props;
+        const { savedPins, searchResults, updateSearchResults } = this.props;
 
         return (
             <div className="map-view">
@@ -120,23 +113,28 @@ class MapView extends Component {
                     onLoad={() => this.setState({ mapLoaded: true })}
                 >
                     {savedPins.map(pin => {
-                        return (
-                            <Marker
-                                latitude={parseFloat(pin.latitude)}
-                                longitude={parseFloat(pin.longitude)}
-                            >
-                                <div className="saved-pin">
-                                    <Label
-                                        className="saved-pin-label shadow"
-                                        //onClick={this.openLocationDetails}
-                                        pointing='below'
-                                    >
-                                        {pin.city}
-                                    </Label>
-                                    <SavedPin />
-                                </div>
-                            </Marker>
-                        )
+                        console.log(pin.city);
+                        console.log(searchResults);
+                        if (searchResults.text !== pin.city) {
+                            return (
+                                <Marker
+                                    latitude={parseFloat(pin.latitude)}
+                                    longitude={parseFloat(pin.longitude)}
+                                    key={pin.id}
+                                >
+                                    <div className="saved-pin">
+                                        <Label
+                                            className="saved-pin-label shadow"
+                                            //onClick={this.openLocationDetails}
+                                            pointing='below'
+                                        >
+                                            {pin.city}
+                                        </Label>
+                                        <SavedPin />
+                                    </div>
+                                </Marker>
+                            )
+                        }
                     })
 
                     }
@@ -160,10 +158,10 @@ class MapView extends Component {
                     ) : (
                             <div></div>
                         )}
-                    {Object.keys(searchResult).length !== 0 ? (
+                    {Object.keys(searchResults).length !== 0 ? (
                         <Marker
-                            latitude={searchResult.latitude}
-                            longitude={searchResult.longitude}
+                            latitude={searchResults.center[1]}
+                            longitude={searchResults.center[0]}
                         >
 
                             <div className="search-location" >
@@ -189,9 +187,8 @@ class MapView extends Component {
                             placeholder="Search for a destination"
                             position="top-left"
                             onClear={() => {
-                                this.setState({
-                                    searchResult: {}
-                                })
+                                const searchResults = {};
+                                updateSearchResults({ searchResults });
                             }}
                         />
                     </div>

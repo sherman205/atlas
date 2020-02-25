@@ -21,7 +21,6 @@ class LocationDetails extends Component {
         const isCurrentlySaved = this.isCurrentlySaved();
 
         if (!isCurrentlySaved) {
-            console.log("adding");
             const pin = {
                 date: moment().format(),
                 latitude: searchResults.geometry.coordinates[1],
