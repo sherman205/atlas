@@ -5,21 +5,18 @@ import { motion } from "framer-motion";
 import { ReactComponent as CurrentLocation } from '../../assets/svg/current_location.svg';
 import { ReactComponent as Plus } from '../../assets/svg/plus.svg';
 import { ReactComponent as Minus } from '../../assets/svg/minus.svg';
+import { ReactComponent as Menu } from '../../assets/svg/menu.svg';
 import { ReactComponent as Settings } from '../../assets/svg/settings.svg';
+import SlidePanel from '../SlidePanel/';
+import BottomPanel from '../BottomPanel';
+import Profile from '../../views/profile';
 
 import './MapOverlay.scss';
-import SlidePanel from '../SlidePanel/SlidePanel';
+
 
 class MapOverlay extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            showMenu: false
-        }
-    }
-
-    onMenuClick = () => {
-        this.setState({ showMenu: !this.state.showMenu });
     }
 
     zoomIn = () => {
@@ -43,6 +40,7 @@ class MapOverlay extends Component {
     }
 
     render() {
+
         return (
             <div>
                 <div className="map-overlay m-lg">
@@ -61,11 +59,10 @@ class MapOverlay extends Component {
                     <motion.div className="map-button justify-center align-vertical" whileTap={{ scale: 0.9 }}>
                         <Settings />
                     </motion.div>
-                    {/* <div className="menu" onClick={this.onMenuClick}>
-                        <Menu />
-                    </div> */}
+
                 </div>
                 <SlidePanel />
+                {/* <BottomPanel /> */}
             </div>
         )
     }

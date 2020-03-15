@@ -29,6 +29,7 @@ class History extends Component {
 
     render() {
         const { dateSelected, groupSelected } = this.state;
+        const { savedPins } = this.props;
 
         const dateOptions = [
             {
@@ -80,7 +81,7 @@ class History extends Component {
                         />
                     </div>
                 </div>
-                <Timeline />
+                <Timeline savedPins={savedPins} />
             </div>
         )
     }

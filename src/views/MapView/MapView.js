@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import MapGL, { Marker } from 'react-map-gl';
-import MapOverlay from '../../components/MapOverlay/MapOverlay';
+import MapOverlay from '../../components/MapOverlay';
 import DeckGL, { GeoJsonLayer } from "deck.gl";
 import Geocoder from "react-map-gl-geocoder";
+import { Label } from 'semantic-ui-react';
+import LoadingComponent from '../../components/LoadingComponent';
 
 import { ReactComponent as SearchLocation } from '../../assets/svg/pin.svg';
 import { ReactComponent as CurrentLocation } from '../../assets/svg/currentLocationDot.svg';
+import { ReactComponent as SavedPin } from '../../assets/svg/saved_pin.svg';
+
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
@@ -23,7 +27,8 @@ class MapView extends Component {
                 longitude: -100,
                 zoom: 3.5,
             },
-            searchResult: {},
+            showDetailLabel: false,
+            mapLoaded: false,
         }
     }
 
@@ -45,6 +50,7 @@ class MapView extends Component {
     }
 
     getCurrentPosition = (pos) => {
+        console.log(pos);
         const zoom = this.state.viewport.zoom >= 10 ? this.state.viewport.zoom : 10;
         this.setState({
             currentPosition: pos,
@@ -68,16 +74,32 @@ class MapView extends Component {
 
     handleOnResult = event => {
         const data = event.result.geometry;
-        this.setState({
-            searchResult: {
-                latitude: data.coordinates[1],
-                longitude: data.coordinates[0],
-            }
-        });
+        const searchResults = event.result;
+        this.props.updateSearchResults({ searchResults });
     };
 
+    showLocationDetailsLabel = () => {
+        this.setState({
+            showDetailLabel: true
+        });
+    }
+
+    openLocationDetails = () => {
+        const slidePanelContent = 'location_details';
+        this.props.showInSlidePanel({ slidePanelContent });
+
+        const isSidePanelOpen = true;
+        this.props.toggleSidePanel({ isSidePanelOpen });
+
+        this.setState({
+            showDetailLabel: false
+        })
+    }
+
     render() {
-        const { viewport, currentPosition, searchResult } = this.state;
+        const { viewport, currentPosition, showDetailLabel, mapLoaded } = this.state;
+
+        const { savedPins, searchResults, updateSearchResults, showInSlidePanel } = this.props;
 
         return (
             <div className="map-view">
@@ -89,7 +111,34 @@ class MapView extends Component {
                     onViewportChange={this._onViewportChange}
                     mapStyle="mapbox://styles/mapbox/light-v9"
                     mapboxApiAccessToken={TOKEN}
+                    onLoad={() => this.setState({ mapLoaded: true })}
                 >
+                    {savedPins.map(pin => {
+                        if (searchResults.text !== pin.map_search_text) {
+                            return (
+                                <Marker
+                                    latitude={parseFloat(pin.latitude)}
+                                    longitude={parseFloat(pin.longitude)}
+                                    key={pin.id}
+                                >
+                                    <div
+                                        className="saved-pin"
+                                        onClick={() => this.openLocationDetails}
+                                    >
+                                        <Label
+                                            className="saved-pin-label shadow"
+                                            pointing='below'
+                                        >
+                                            {pin.city}
+                                        </Label>
+                                        <SavedPin />
+                                    </div>
+                                </Marker>
+                            )
+                        }
+                    })
+
+                    }
                     {Object.keys(currentPosition).length !== 0 ? (
                         <Marker
                             latitude={currentPosition.lat}
@@ -100,12 +149,32 @@ class MapView extends Component {
                     ) : (
                             <div></div>
                         )}
-                    {Object.keys(searchResult).length !== 0 ? (
+                    {Object.keys(currentPosition).length !== 0 ? (
                         <Marker
-                            latitude={searchResult.latitude}
-                            longitude={searchResult.longitude}
+                            latitude={currentPosition.lat}
+                            longitude={currentPosition.lng}
                         >
-                            <div className="search-location"><SearchLocation /></div>
+                            <div className="current-location"><CurrentLocation /></div>
+                        </Marker>
+                    ) : (
+                            <div></div>
+                        )}
+                    {Object.keys(searchResults).length !== 0 ? (
+                        <Marker
+                            latitude={searchResults.center[1]}
+                            longitude={searchResults.center[0]}
+                        >
+
+                            <div className="search-location" >
+                                <Label
+                                    className="location-details-label shadow"
+                                    onClick={this.openLocationDetails}
+                                    pointing='below'
+                                >
+                                    View location details
+                                    </Label>
+                                <SearchLocation onClick={this.showLocationDetailsLabel} />
+                            </div>
                         </Marker>
                     ) : (
                             <div></div>
@@ -119,14 +188,18 @@ class MapView extends Component {
                             placeholder="Search for a destination"
                             position="top-left"
                             onClear={() => {
-                                this.setState({
-                                    searchResult: {}
-                                })
+                                const searchResults = {};
+                                const slidePanelContent = 'profile';
+                                updateSearchResults({ searchResults });
+                                showInSlidePanel({ slidePanelContent });
                             }}
                         />
                     </div>
                 </MapGL>
                 <MapOverlay zoomCallback={this.handleZoom} geolocation={this.getCurrentPosition} />
+                {!mapLoaded &&
+                    <LoadingComponent />
+                }
             </div>
         )
     }
