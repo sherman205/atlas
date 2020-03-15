@@ -99,7 +99,7 @@ class MapView extends Component {
     render() {
         const { viewport, currentPosition, showDetailLabel, mapLoaded } = this.state;
 
-        const { savedPins, searchResults, updateSearchResults } = this.props;
+        const { savedPins, searchResults, updateSearchResults, showInSlidePanel } = this.props;
 
         return (
             <div className="map-view">
@@ -189,7 +189,9 @@ class MapView extends Component {
                             position="top-left"
                             onClear={() => {
                                 const searchResults = {};
+                                const slidePanelContent = 'profile';
                                 updateSearchResults({ searchResults });
+                                showInSlidePanel({ slidePanelContent });
                             }}
                         />
                     </div>
