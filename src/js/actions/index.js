@@ -1,12 +1,4 @@
-// import {
-//     TOGGLE_BOTTOM_PANEL,
-//     TOGGLE_SIDE_PANEL,
-//     UPDATE_SEARCH_RESULTS,
-//     SHOW_IN_SLIDE_PANEL,
-//     SET_USER,
-//     UPDATE_SAVED_PINS,
-// } from "../constants/action-types";
-import { ActionTypes } from "../constants/action-types";
+import { ActionTypes, AuthTypes } from "../constants/action-types";
 import { ActionUrls, AuthUrls } from "../constants/urls";
 import { getQueriesForElement } from "@testing-library/react";
 
@@ -36,7 +28,7 @@ export function updateSavedPins(payload) {
 }
 
 export function authLogin(payload) {
-    return { type: ActionTypes.LOGIN, payload }
+    return { type: AuthTypes.LOGIN, payload }
 }
 
 export function getUser(id) {
@@ -138,4 +130,11 @@ export function userLogin(credentials) {
                 console.error('Error:', error);
             });
     }
+}
+
+export function userLogout() {
+    localStorage.removeItem("token");
+    return {
+        type: AuthTypes.LOGOUT
+    };
 }

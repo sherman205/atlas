@@ -1,12 +1,4 @@
-// import {
-//     TOGGLE_BOTTOM_PANEL,
-//     TOGGLE_SIDE_PANEL,
-//     UPDATE_SEARCH_RESULTS,
-//     SHOW_IN_SLIDE_PANEL,
-//     SET_USER,
-//     UPDATE_SAVED_PINS,
-// } from "../constants/action-types";
-import { ActionTypes } from "../constants/action-types";
+import { AuthTypes, ActionTypes } from "../constants/action-types";
 
 
 const initialState = {
@@ -55,7 +47,7 @@ function rootReducer(state = initialState, action) {
             savedPins: action.payload
         });
     }
-    if (action.type === ActionTypes.LOGIN) {
+    if (action.type === AuthTypes.LOGIN) {
         return Object.assign({}, state, {
             isAuthenticated: action.payload
         });
