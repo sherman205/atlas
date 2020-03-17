@@ -7,6 +7,7 @@
 //     UPDATE_SAVED_PINS,
 // } from "../constants/action-types";
 import { ActionTypes } from "../constants/action-types";
+import { AuthUrls } from "../constants/urls";
 import { getQueriesForElement } from "@testing-library/react";
 
 
@@ -32,6 +33,10 @@ export function setUser(payload) {
 
 export function updateSavedPins(payload) {
     return { type: ActionTypes.UPDATE_SAVED_PINS, payload }
+}
+
+export function authLogin(payload) {
+    return { type: ActionTypes.LOGIN, payload }
 }
 
 export function getUser(id) {
@@ -105,6 +110,29 @@ export function removePin(id) {
             .then((data) => {
                 const savedPins = data;
                 dispatch(updateSavedPins(savedPins));
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+}
+
+/* Auth actions */
+
+export function userLogin(credentials) {
+    return dispatch => {
+        return fetch(AuthUrls.LOGIN, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(credentials),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const token = data.data.key;
+                dispatch(authLogin(token));
+                localStorage.setItem("token", token);
             })
             .catch((error) => {
                 console.error('Error:', error);

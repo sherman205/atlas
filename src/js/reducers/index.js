@@ -16,6 +16,7 @@ const initialState = {
     slidePanelContent: 'profile',
     user: {},
     savedPins: [],
+    isAuthenticated: false
 };
 
 function rootReducer(state = initialState, action) {
@@ -52,6 +53,11 @@ function rootReducer(state = initialState, action) {
     if (action.type === ActionTypes.UPDATE_SAVED_PINS) {
         return Object.assign({}, state, {
             savedPins: action.payload
+        });
+    }
+    if (action.type === ActionTypes.LOGIN) {
+        return Object.assign({}, state, {
+            isAuthenticated: action.payload
         });
     }
     return state;
