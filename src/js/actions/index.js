@@ -7,7 +7,7 @@
 //     UPDATE_SAVED_PINS,
 // } from "../constants/action-types";
 import { ActionTypes } from "../constants/action-types";
-import { AuthUrls } from "../constants/urls";
+import { ActionUrls, AuthUrls } from "../constants/urls";
 import { getQueriesForElement } from "@testing-library/react";
 
 
@@ -41,7 +41,7 @@ export function authLogin(payload) {
 
 export function getUser(id) {
     return dispatch => {
-        return fetch('http://127.0.0.1:8000/api/v1/profiles/1/', {
+        return fetch(ActionUrls.GET_USER, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export function getUser(id) {
 
 export function getPins() {
     return dispatch => {
-        return fetch('http://127.0.0.1:8000/api/v1/pins/1/', {
+        return fetch(ActionUrls.GET_PINS, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ export function getPins() {
 
 export function savePin(pin) {
     return dispatch => {
-        return fetch('http://127.0.0.1:8000/api/v1/pins/add/', {
+        return fetch(ActionUrls.SAVE_PIN, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export function savePin(pin) {
 
 export function removePin(id) {
     return dispatch => {
-        return fetch(`http://127.0.0.1:8000/api/v1/pins/delete/${id}/`, {
+        return fetch(`${ActionUrls.REMOVE_PIN}${id}/`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
