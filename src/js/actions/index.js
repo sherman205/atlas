@@ -1,36 +1,37 @@
-import {
-    TOGGLE_BOTTOM_PANEL,
-    TOGGLE_SIDE_PANEL,
-    UPDATE_SEARCH_RESULTS,
-    SHOW_IN_SLIDE_PANEL,
-    SET_USER,
-    UPDATE_SAVED_PINS,
-} from "../constants/action-types";
+// import {
+//     TOGGLE_BOTTOM_PANEL,
+//     TOGGLE_SIDE_PANEL,
+//     UPDATE_SEARCH_RESULTS,
+//     SHOW_IN_SLIDE_PANEL,
+//     SET_USER,
+//     UPDATE_SAVED_PINS,
+// } from "../constants/action-types";
+import { ActionTypes } from "../constants/action-types";
 import { getQueriesForElement } from "@testing-library/react";
 
 
 export function toggleBottomPanel(payload) {
-    return { type: TOGGLE_BOTTOM_PANEL, payload }
+    return { type: ActionTypes.TOGGLE_BOTTOM_PANEL, payload }
 };
 
 export function toggleSidePanel(payload) {
-    return { type: TOGGLE_SIDE_PANEL, payload }
+    return { type: ActionTypes.TOGGLE_SIDE_PANEL, payload }
 };
 
 export function updateSearchResults(payload) {
-    return { type: UPDATE_SEARCH_RESULTS, payload }
+    return { type: ActionTypes.UPDATE_SEARCH_RESULTS, payload }
 };
 
 export function showInSlidePanel(payload) {
-    return { type: SHOW_IN_SLIDE_PANEL, payload }
+    return { type: ActionTypes.SHOW_IN_SLIDE_PANEL, payload }
 };
 
 export function setUser(payload) {
-    return { type: SET_USER, payload }
+    return { type: ActionTypes.SET_USER, payload }
 };
 
 export function updateSavedPins(payload) {
-    return { type: UPDATE_SAVED_PINS, payload }
+    return { type: ActionTypes.UPDATE_SAVED_PINS, payload }
 }
 
 export function getUser(id) {
