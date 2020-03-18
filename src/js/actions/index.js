@@ -122,8 +122,8 @@ export function userLogin(credentials) {
         })
             .then((response) => response.json())
             .then((data) => {
-                const token = data.data.key;
-                dispatch(authLogin(token));
+                const token = data.key;
+                dispatch(authLogin(token ? true : false));
                 localStorage.setItem("token", token);
             })
             .catch((error) => {
