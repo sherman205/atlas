@@ -6,6 +6,7 @@ import {
     showInSlidePanel,
     setUser,
     updateSavedPins,
+    authLogin
 } from "../js/actions/index";
 
 window.store = store;
@@ -16,3 +17,4 @@ window.showInSlidePanel = showInSlidePanel;
 window.showInSlidePanel = showInSlidePanel;
 window.setUser = setUser;
 window.updateSavedPins = updateSavedPins;
+window.authLogin = authLogin;

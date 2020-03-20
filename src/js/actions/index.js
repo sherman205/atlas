@@ -1,41 +1,39 @@
-import {
-    TOGGLE_BOTTOM_PANEL,
-    TOGGLE_SIDE_PANEL,
-    UPDATE_SEARCH_RESULTS,
-    SHOW_IN_SLIDE_PANEL,
-    SET_USER,
-    UPDATE_SAVED_PINS,
-} from "../constants/action-types";
+import { ActionTypes, AuthTypes } from "../constants/action-types";
+import { ActionUrls, AuthUrls } from "../constants/urls";
 import { getQueriesForElement } from "@testing-library/react";
 
 
 export function toggleBottomPanel(payload) {
-    return { type: TOGGLE_BOTTOM_PANEL, payload }
+    return { type: ActionTypes.TOGGLE_BOTTOM_PANEL, payload }
 };
 
 export function toggleSidePanel(payload) {
-    return { type: TOGGLE_SIDE_PANEL, payload }
+    return { type: ActionTypes.TOGGLE_SIDE_PANEL, payload }
 };
 
 export function updateSearchResults(payload) {
-    return { type: UPDATE_SEARCH_RESULTS, payload }
+    return { type: ActionTypes.UPDATE_SEARCH_RESULTS, payload }
 };
 
 export function showInSlidePanel(payload) {
-    return { type: SHOW_IN_SLIDE_PANEL, payload }
+    return { type: ActionTypes.SHOW_IN_SLIDE_PANEL, payload }
 };
 
 export function setUser(payload) {
-    return { type: SET_USER, payload }
+    return { type: ActionTypes.SET_USER, payload }
 };
 
 export function updateSavedPins(payload) {
-    return { type: UPDATE_SAVED_PINS, payload }
+    return { type: ActionTypes.UPDATE_SAVED_PINS, payload }
+}
+
+export function authLogin(payload) {
+    return { type: AuthTypes.LOGIN, payload }
 }
 
 export function getUser(id) {
     return dispatch => {
-        return fetch('http://127.0.0.1:8000/api/v1/profiles/1/', {
+        return fetch(ActionUrls.GET_USER, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,7 +53,7 @@ export function getUser(id) {
 
 export function getPins() {
     return dispatch => {
-        return fetch('http://127.0.0.1:8000/api/v1/pins/1/', {
+        return fetch(ActionUrls.GET_PINS, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -74,7 +72,7 @@ export function getPins() {
 
 export function savePin(pin) {
     return dispatch => {
-        return fetch('http://127.0.0.1:8000/api/v1/pins/add/', {
+        return fetch(ActionUrls.SAVE_PIN, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -94,7 +92,7 @@ export function savePin(pin) {
 
 export function removePin(id) {
     return dispatch => {
-        return fetch(`http://127.0.0.1:8000/api/v1/pins/delete/${id}/`, {
+        return fetch(`${ActionUrls.REMOVE_PIN}${id}/`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -109,4 +107,34 @@ export function removePin(id) {
                 console.error('Error:', error);
             });
     }
+}
+
+/* Auth actions */
+
+export function userLogin(credentials) {
+    return dispatch => {
+        return fetch(AuthUrls.LOGIN, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(credentials),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const token = data.key;
+                dispatch(authLogin(token ? true : false));
+                localStorage.setItem("token", token);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+}
+
+export function userLogout() {
+    localStorage.removeItem("token");
+    return {
+        type: AuthTypes.LOGOUT
+    };
 }
