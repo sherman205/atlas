@@ -22,13 +22,8 @@ class LocationDetails extends Component {
 
         if (!isCurrentlySaved) {
             const pin = {
+                ...searchResults,
                 date: moment().format(),
-                latitude: searchResults.geometry.coordinates[1],
-                longitude: searchResults.geometry.coordinates[0],
-                map_search_text: searchResults.text,
-                city: searchResults.text,
-                state: 'OR', //searchResults.context[0].text,
-                country: searchResults.context[1].text,
                 user_id: user.id
             }
             savePin(pin);
@@ -41,33 +36,21 @@ class LocationDetails extends Component {
     isCurrentlySaved = () => {
         const { savedPins, searchResults } = this.props;
 
-        return savedPins.find(pin => pin.city === searchResults.text);
+        return savedPins.find(pin => pin.map_search_text === searchResults.map_search_text);
     }
 
     render() {
         const { searchResults } = this.props;
 
         const isCurrentlySaved = this.isCurrentlySaved();
-        if (searchResults.text) {
+        if (searchResults.map_search_text) {
 
-            let { state, country } = '';
-
-            const searchDisplay = (searchResults.address ? searchResults.address + ' ' : '') + searchResults.text
-
-            searchResults.context.map(item => {
-                if (item.id.includes('region')) {
-                    state = item.text;
-                }
-                if (item.id.includes('country')) {
-                    country = item.text;
-                }
-            })
             return (
                 <div className="location-details flex flex-column my-lg">
                     <div className="flex">
-                        <h1 className="location-details-header my-sm">{searchDisplay}</h1>
+                        <h1 className="location-details-header my-sm">{searchResults.map_search_text}</h1>
                     </div>
-                    <h4 className="location-details-subheader my-sm">{state} | {country}</h4>
+                    <h4 className="location-details-subheader my-sm">{searchResults.state} | {searchResults.country}</h4>
                     <Divider />
                     <p>Bunch of content related to location goes here</p>
                     <Button as='div' labelPosition='right' size='mini' onClick={this.togglePin}>

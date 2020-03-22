@@ -19,12 +19,16 @@ $md: 18px;
 $lg: 24px;
 $xlg: 36px;
 
+$normal: 400;
 $bold: 600;
 
 .font-weight--bold{
     font-weight: $bold;
 }
 
+.font-size--xsm{
+    font-size: $xsm;
+}
 .font-size--sm{
     font-size: $sm;
 }

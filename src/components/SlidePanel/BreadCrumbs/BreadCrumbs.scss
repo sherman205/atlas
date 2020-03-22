@@ -1,0 +1,15 @@
+@import '../../../styles/globals.scss';
+@import '../../../styles/colors.scss';
+
+.breadcrumbs{
+    color: $gray-text;
+
+    .crumb{
+        cursor: pointer;
+    }
+
+    .-active{
+        border-bottom: 2px solid $secondary;
+        color: $primary;
+    }
+}

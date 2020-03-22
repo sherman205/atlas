@@ -6,6 +6,7 @@ import Profile from '../../views/profile';
 import LocationDetails from '../../views/LocationDetails';
 
 import './SlidePanel.scss';
+import BreadCrumbs from './BreadCrumbs';
 
 const panel = {
     open: { right: 0 },
@@ -39,9 +40,12 @@ class SlidePanel extends Component {
                     variants={panel}
                 >
                     <div className="panel-container p-lg">
-                        <Cross
-                            onClick={this.togglePanel}
-                        />
+                        <div className="flex space-between">
+                            <Cross
+                                onClick={this.togglePanel}
+                            />
+                            <BreadCrumbs />
+                        </div>
                         {slidePanelContent === 'profile' &&
                             <Profile />
                         }
