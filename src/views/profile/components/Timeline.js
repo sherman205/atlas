@@ -9,7 +9,7 @@ function Timeline(props) {
     let items = savedPins.map(pin => {
         return {
             date: moment(pin.date).format("MMM Do YY"),
-            location: pin.city + ' | ' + pin.country              // Feb 17th 20
+            location: pin.map_search_text //+ ' | ' + pin.country              // Feb 17th 20
         }
     });
 

@@ -14,6 +14,7 @@ import { ReactComponent as SavedPin } from '../../assets/svg/saved_pin.svg';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import './MapView.scss';
+import { updateSavedPins } from '../../js/actions';
 
 const TOKEN = 'pk.eyJ1IjoicndvbGZlMjIiLCJhIjoiY2szdW5ndmx6MGY2czNtczF3NjdxYXpnayJ9.nhgDynrUo5SYRLezWq00Wg';
 
@@ -73,10 +74,29 @@ class MapView extends Component {
     };
 
     handleOnResult = event => {
+        const { updateSearchResults } = this.props;
+
         const data = event.result.geometry;
-        const searchResults = event.result;
-        this.props.updateSearchResults({ searchResults });
+        const searchResults = this.buildSearchResult(event.result);
+        updateSearchResults({ searchResults });
     };
+
+    buildSearchResult = (result) => {
+        const city = result.context.find(item => item.id.includes('place'));
+        const state = result.context.find(item => item.id.includes('region'));
+        const country = result.context.find(item => item.id.includes('country'));
+
+        const searchResults = {
+            latitude: result.geometry.coordinates[1],
+            longitude: result.geometry.coordinates[0],
+            city: city ? city.text : null,
+            state: state ? state.text : null,
+            country: country ? country.text : null,
+            map_search_text: result.address ? result.address + ' ' + result.text : result.text
+        }
+
+        return searchResults;
+    }
 
     showLocationDetailsLabel = () => {
         this.setState({
@@ -85,16 +105,33 @@ class MapView extends Component {
     }
 
     openLocationDetails = () => {
+        const { showInSlidePanel, toggleSidePanel } = this.props;
+
         const slidePanelContent = 'location_details';
-        this.props.showInSlidePanel({ slidePanelContent });
+        showInSlidePanel({ slidePanelContent });
 
         const isSidePanelOpen = true;
-        this.props.toggleSidePanel({ isSidePanelOpen });
+        toggleSidePanel({ isSidePanelOpen });
 
         this.setState({
             showDetailLabel: false
         })
     }
+
+    openLocationDetailsFromPin = (clickedPin) => {
+        const { savedPins, updateSearchResults, showInSlidePanel, toggleSidePanel } = this.props;
+
+        const searchResults = savedPins.find(pin => pin.map_search_text === clickedPin);
+        updateSearchResults({ searchResults });
+
+        const slidePanelContent = 'location_details';
+        showInSlidePanel({ slidePanelContent });
+
+        const isSidePanelOpen = true;
+        toggleSidePanel({ isSidePanelOpen });
+    }
+
+
 
     render() {
         const { viewport, currentPosition, showDetailLabel, mapLoaded } = this.state;
@@ -114,7 +151,7 @@ class MapView extends Component {
                     onLoad={() => this.setState({ mapLoaded: true })}
                 >
                     {savedPins.map(pin => {
-                        if (searchResults.text !== pin.map_search_text) {
+                        if (searchResults.map_search_text !== pin.map_search_text) {
                             return (
                                 <Marker
                                     latitude={parseFloat(pin.latitude)}
@@ -123,13 +160,13 @@ class MapView extends Component {
                                 >
                                     <div
                                         className="saved-pin"
-                                        onClick={() => this.openLocationDetails}
+                                        onClick={() => this.openLocationDetailsFromPin(pin.map_search_text)}
                                     >
                                         <Label
                                             className="saved-pin-label shadow"
                                             pointing='below'
                                         >
-                                            {pin.city}
+                                            {pin.map_search_text}
                                         </Label>
                                         <SavedPin />
                                     </div>
@@ -161,8 +198,8 @@ class MapView extends Component {
                         )}
                     {Object.keys(searchResults).length !== 0 ? (
                         <Marker
-                            latitude={searchResults.center[1]}
-                            longitude={searchResults.center[0]}
+                            latitude={parseFloat(searchResults.latitude)}
+                            longitude={parseFloat(searchResults.longitude)}
                         >
 
                             <div className="search-location" >
