@@ -51,7 +51,6 @@ class MapView extends Component {
     }
 
     getCurrentPosition = (pos) => {
-        console.log(pos);
         const zoom = this.state.viewport.zoom >= 10 ? this.state.viewport.zoom : 10;
         this.setState({
             currentPosition: pos,

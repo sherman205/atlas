@@ -12,7 +12,6 @@ export default function BreadCrumbs(props) {
         showInSlidePanel({ slidePanelContent });
     }
 
-    console.log(slidePanelContent);
     return (
         <div className="breadcrumbs flex font-size--xsm font-weight--normal">
             <span
