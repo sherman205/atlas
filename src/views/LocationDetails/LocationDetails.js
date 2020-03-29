@@ -61,11 +61,13 @@ class LocationDetails extends Component {
 
             return (
                 <div>
-                    <div className="image-container">
+                    {/* <div className="image-container">
                         {this.state.url && <img src={this.state.url}></img>}
-                    </div>
+                    </div> */}
+                    {this.state.url && <img className="pt-md" src={this.state.url}></img>}
 
-                    <div className="location-details flex flex-column my-lg">
+                    <div className="location-details flex flex-column">
+
                         <div className="flex">
                             <h1 className="location-details-header my-sm">{searchResults.map_search_text}</h1>
                         </div>

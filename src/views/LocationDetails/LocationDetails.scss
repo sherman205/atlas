@@ -1,4 +1,26 @@
 @import '../../styles/colors.scss';
+@import '../../styles/globals.scss';
+
+
+// .image-container{
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+
+//     img{
+//         border-radius: $md 0 0 0;
+//         height: 600px;
+//         width: 100%;
+//         object-fit: cover;
+//     }
+// }
+
+img{
+    border-radius: $xxsm;
+    height: 450px;
+    width: 100%;
+    object-fit: cover;
+}
 
 .location-details{
 

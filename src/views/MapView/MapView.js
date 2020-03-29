@@ -81,6 +81,7 @@ class MapView extends Component {
     };
 
     buildSearchResult = (result) => {
+        console.log(result);
         const city = result.context.find(item => item.id.includes('place'));
         const state = result.context.find(item => item.id.includes('region'));
         const country = result.context.find(item => item.id.includes('country'));
