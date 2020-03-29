@@ -47,7 +47,7 @@ function rootReducer(state = initialState, action) {
             savedPins: action.payload
         });
     }
-    if (action.type === AuthTypes.LOGIN) {
+    if (action.type === AuthTypes.LOGIN || action.type === AuthTypes.REGISTER) {
         return Object.assign({}, state, {
             isAuthenticated: action.payload
         });

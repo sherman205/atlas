@@ -9,5 +9,6 @@ export const ActionTypes = {
 
 export const AuthTypes = {
   LOGIN: "LOGIN",
-  LOGOUT: "LOGOUT"
+  LOGOUT: "LOGOUT",
+  REGISTER: "REGISTER"
 };

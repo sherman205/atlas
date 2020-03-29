@@ -6,6 +6,7 @@ class Login extends Component {
         super(props);
         this.state = {
             username: '',
+            email: '',
             password: ''
         }
     }
@@ -29,8 +30,26 @@ class Login extends Component {
         userLogin(credentials);
     }
 
+    signup = (e) => {
+        e.preventDefault();
+        const { userRegister } = this.props;
+        const credentials = {
+            username: this.state.username,
+            email: this.state.email,
+            password1: this.state.password,
+            password2: this.state.password
+        }
+        this.setState({
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password
+        });
+
+        userRegister(credentials);
+    }
+
     render() {
-        const { username, password } = this.state;
+        const { username, email, password } = this.state;
     
         return (
             <div className="login-view">
@@ -41,6 +60,18 @@ class Login extends Component {
                     <label>password: </label>
                     <input type="password" name="password" value={password} onChange={this.handleChange}/>
                     <button type="submit">Login</button>
+                </form>
+                <form onSubmit={this.signup}>
+                    <h5>First time user?</h5>
+                    <label>username: </label>
+                    <input type="text" name="username" value={username} onChange={this.handleChange}/>
+                    <label>email: </label>
+                    <input type="email" name="email" value={email} onChange={this.handleChange}/>
+                    <label>password: </label>
+                    <input type="password" name="password" value={password} onChange={this.handleChange}/>
+                    <label>Confirm password: </label>
+                    <input type="password" name="password" value={password} onChange={this.handleChange}/>
+                    <button type="submit">Sign up</button>
                 </form>
             </div>
         );

@@ -138,3 +138,24 @@ export function userLogout() {
         type: AuthTypes.LOGOUT
     };
 }
+
+export function userRegister(credentials) {
+    return dispatch => {
+        return fetch(AuthUrls.REGISTER, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(credentials),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const token = data.key;
+                dispatch(authLogin(token ? true : false));
+                localStorage.setItem("token", token);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+}
