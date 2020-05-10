@@ -23,15 +23,17 @@ class SlidePanel extends Component {
         this.props.toggleSidePanel({ isSidePanelOpen });
     }
     render() {
-        const { isBottomPanelOpen, isSidePanelOpen, searchResults, slidePanelContent } = this.props;
+        const { isSidePanelOpen, searchResults, slidePanelContent } = this.props;
 
         return (
             <div>
                 {!isSidePanelOpen &&
-                    <Menu
-                        className="icon"
-                        onClick={this.togglePanel}
-                    />
+                    <div className="menu-button flex justify-center align-vertical shadow">
+                        <Menu
+                            className="icon"
+                            onClick={this.togglePanel}
+                        />
+                    </div>
                 }
                 <motion.div
                     className="slide-panel shadow"

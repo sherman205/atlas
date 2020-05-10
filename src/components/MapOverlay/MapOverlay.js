@@ -8,7 +8,6 @@ import { ReactComponent as Minus } from '../../assets/svg/minus.svg';
 import { ReactComponent as Menu } from '../../assets/svg/menu.svg';
 import { ReactComponent as Settings } from '../../assets/svg/settings.svg';
 import SlidePanel from '../SlidePanel/';
-import BottomPanel from '../BottomPanel';
 import Profile from '../../views/profile';
 
 import './MapOverlay.scss';
@@ -62,7 +61,6 @@ class MapOverlay extends Component {
 
                 </div>
                 <SlidePanel />
-                {/* <BottomPanel /> */}
             </div>
         )
     }

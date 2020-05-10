@@ -1,10 +1,20 @@
 @import '../../styles/colors.scss';
 
-.icon{
+
+.menu-button{
     position: absolute;
     top: 50px;
     right: 50px;
+    background: white;
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
 }
+
+.icon{
+    margin-top: 5px;
+}
+
 .slide-panel {
     position: absolute;
     top: 0;

@@ -4,7 +4,6 @@ import SlidePanel from './SlidePanel';
 
 const mapStateToProps = state => {
     return {
-        isBottomPanelOpen: state.isBottomPanelOpen,
         isSidePanelOpen: state.isSidePanelOpen,
         searchResults: state.searchResults,
         slidePanelContent: state.slidePanelContent,

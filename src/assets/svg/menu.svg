@@ -17,10 +17,10 @@
   </defs>
   <g id="Menu" transform="translate(9 6)">
     <g transform="matrix(1, 0, 0, 1, -9, -6)" filter="url(#Rectangle_4)">
-      <rect id="Rectangle_4-2" data-name="Rectangle 4" width="20" height="3" rx="1" transform="translate(9 6)" fill="#fcfcfc"/>
+      <rect id="Rectangle_4-2" data-name="Rectangle 4" width="20" height="3" rx="1" transform="translate(9 6)" fill="#1a1a1a"/>
     </g>
     <g transform="matrix(1, 0, 0, 1, -9, -6)" filter="url(#Rectangle_5)">
-      <rect id="Rectangle_5-2" data-name="Rectangle 5" width="13" height="3" rx="1" transform="translate(9 12)" fill="#fcfcfc"/>
+      <rect id="Rectangle_5-2" data-name="Rectangle 5" width="13" height="3" rx="1" transform="translate(9 12)" fill="#1a1a1a"/>
     </g>
   </g>
 </svg>

@@ -233,9 +233,9 @@ class MapView extends Component {
                     </div>
                 </MapGL>
                 <MapOverlay zoomCallback={this.handleZoom} geolocation={this.getCurrentPosition} />
-                {!mapLoaded &&
+                {/* {!mapLoaded &&
                     <LoadingComponent />
-                }
+                } */}
             </div>
         )
     }
