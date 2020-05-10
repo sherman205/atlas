@@ -1,17 +1,14 @@
 import {
-    TOGGLE_BOTTOM_PANEL,
     TOGGLE_SIDE_PANEL,
     UPDATE_SEARCH_RESULTS,
     SHOW_IN_SLIDE_PANEL,
     SET_USER,
     UPDATE_SAVED_PINS,
+    IS_USER_SIGNED_IN,
 } from "../constants/action-types";
 import { getQueriesForElement } from "@testing-library/react";
 
 
-export function toggleBottomPanel(payload) {
-    return { type: TOGGLE_BOTTOM_PANEL, payload }
-};
 
 export function toggleSidePanel(payload) {
     return { type: TOGGLE_SIDE_PANEL, payload }
@@ -32,6 +29,12 @@ export function setUser(payload) {
 export function updateSavedPins(payload) {
     return { type: UPDATE_SAVED_PINS, payload }
 }
+
+export function signInUser(payload) {
+    console.log(payload);
+    return { type: IS_USER_SIGNED_IN, payload }
+}
+
 
 export function getUser(id) {
     return dispatch => {

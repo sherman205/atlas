@@ -6,3 +6,5 @@ export const SET_USER = "SET_USER";
 
 export const UPDATE_SAVED_PINS = "UPDATE_SAVED_PINS";
 
+export const IS_USER_SIGNED_IN = "IS_USER_SIGNED_IN";
+

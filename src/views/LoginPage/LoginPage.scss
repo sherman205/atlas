@@ -1,0 +1,26 @@
+@import '../../styles/colors.scss';
+@import '../../styles/globals.scss';
+
+.login-page-container{
+    // background: -moz-linear-gradient(left, rgba(250,172,168,0.6) 0%, rgba(224,195,252,0.6) 100%);
+    // background: -webkit-gradient(left top, right top, color-stop(0%, rgba(250,172,168,0.6)), color-stop(100%, rgba(224,195,252,0.6)));
+    // background: -webkit-linear-gradient(left, rgba(250,172,168,0.6) 0%, rgba(224,195,252,0.6) 100%);
+    // filter: blur(20px);
+    // position: absolute;
+    filter: blur(4px);
+
+
+    .gradient{
+        background: -moz-linear-gradient(left, rgba(250,172,168,0.6) 0%, rgba(224,195,252,0.6) 100%);
+        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(250,172,168,0.6)), color-stop(100%, rgba(224,195,252,0.6)));
+        background: -webkit-linear-gradient(left, rgba(250,172,168,0.6) 0%, rgba(224,195,252,0.6) 100%);
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        z-index: 100;
+    }
+    .no-show{
+        display: none;
+    }
+}
+

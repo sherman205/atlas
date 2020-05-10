@@ -1,16 +1,16 @@
 import {
-    TOGGLE_BOTTOM_PANEL,
     TOGGLE_SIDE_PANEL,
     UPDATE_SEARCH_RESULTS,
     SHOW_IN_SLIDE_PANEL,
     SET_USER,
     UPDATE_SAVED_PINS,
+    IS_USER_SIGNED_IN,
 } from "../constants/action-types";
 
 
 const initialState = {
-    isBottomPanelOpen: false,
     isSidePanelOpen: false,
+    isUserSignedIn: false,
     searchResults: {},
     slidePanelContent: 'profile',
     user: {},
@@ -18,11 +18,6 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action) {
-    if (action.type === TOGGLE_BOTTOM_PANEL) {
-        return Object.assign({}, state, {
-            isBottomPanelOpen: action.payload.isBottomPanelOpen
-        });
-    }
 
     if (action.type === TOGGLE_SIDE_PANEL) {
         return Object.assign({}, state, {
@@ -45,6 +40,14 @@ function rootReducer(state = initialState, action) {
     if (action.type === SET_USER) {
         return Object.assign({}, state, {
             user: action.payload.user
+        });
+    }
+
+    if (action.type === IS_USER_SIGNED_IN) {
+        console.log("in reducer");
+        console.log(action);
+        return Object.assign({}, state, {
+            isUserSignedIn: action.payload.isUserSignedIn
         });
     }
 
